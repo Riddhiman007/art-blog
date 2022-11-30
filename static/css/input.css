@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind screens;
+@tailwind variants;
+@tailwind utilities;
+
+/* :root {
+    color: whitesmoke;
+    height: 100%;
+    width: 100%;
+} */
+
+@media screen and (max-width:1440px) {
+    :root {
+        font-size: 62.5%;
+        color: whitesmoke;
+        height: 100%;
+        width: 100%;
+    }
+}
+
+.list-style-none {
+    list-style: none;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.justify-content-space-evenly {
+    justify-content: space-evenly;
+}
+
+
+
+@media only screen and (min-width:720px) {
+    .navbar {
+        display: none;
+    }
+
+    .end {
+        justify-content: end;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    #slidebar {
+        background: rgb(5, 68, 104);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 225px;
+        height: 100%;
+        padding: 20px 0;
+        transition: all 0.5s ease;
+    }
+
+    #slidebar-hide {
+        display: none;
+    }
+}

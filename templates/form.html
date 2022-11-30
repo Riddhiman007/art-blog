@@ -1,0 +1,33 @@
+{% extends "layout.html"%}
+{% block content %}
+
+
+<main>
+    <div class="border-2 border-black w-1/2 inline-block h-[100%] box-content">
+        <form action="/courses" class="text-black" method="post">
+            <div>
+                <div class="text-black">
+                    <label for="name" class="font-black text-3xl">Name: </label><input type="text" name="Name"
+                        id="name">
+                </div>
+                <div>
+                    <label for="contact" class="font-black text-3xl">Contact: </label><input type="tel" name=""
+                        id="contact">
+                </div>
+                <div>
+                    <select name="course" id="course" onchange="course_desc()" class="font-black text-3xl">
+                        <option>Select Course</option>
+                        <option value="watercolor">watercolor</option>
+                    </select>
+                </div>
+                <div>
+                    <input type="submit" value="Submit" placeholder="Submit">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="w-1/2 inline-block h-[100%]"></div>
+</main>
+
+
+{% endblock %}

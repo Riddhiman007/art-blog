@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "start": "tailwindcss -i static/css/input.css -o static/css/util.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.2.1"
+  },
+  "dependencies": {
+    "vite": "^3.2.4"
+  }
+}

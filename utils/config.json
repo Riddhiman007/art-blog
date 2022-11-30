@@ -1,0 +1,11 @@
+{
+    "params": {
+        "title": "Kalaspandan Art Gallery",
+        "description": "A hub for mastering art"
+    },
+    "smtp": {
+        "server": "smtp.gmail.com",
+        "username": "rid56593@gmail.com",
+        "password": "mybvxzyhiyquirpz"
+    }
+}

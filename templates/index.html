@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<main id="home" class="">
+    <div class="w-full h-[200%] font-black background-url flex flex-col justify-center m-auto">
+        <div class="h-[100%] m-[15%] text-center">
+            <h1 class="text-white order-1 text-center text-[3rem] p-[auto]">{{params["title"]}}</h1>
+            <h3 class="text-white text">{{params["description"]}}</h3>
+        </div>
+
+    </div>
+    <div class=" min-h-[100%] min-w-[100%]">
+        <div class="flex justify-center  flex-nowrap bg-i">
+            <div class="text-black bg-white p-3 min-w-[50%] text-center min-h-[50%] m-[2rem]">
+                <h1 class="font-extrabold text-4xl">Hello</h1>
+                <h3 class=""></h3>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

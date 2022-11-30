@@ -1,0 +1,3 @@
+{
+    "code-runner.customCommand": "npx tailwindcss -i static/css/input.css -o static/css/util.css --watch"
+}
