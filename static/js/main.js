@@ -7,7 +7,8 @@ function slidebar() {
 function course_desc() {
     const wcolor = "you must pay &rupee500"
     let crs = document.querySelector('select').value
+    amt = document.getElementById('amt')
     if (crs == 'watercolor') {
-        alert(wcolor)
+        amt.innerHTML = 1200
     }
 }

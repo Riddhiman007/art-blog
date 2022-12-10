@@ -5,10 +5,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "command": "npm start",
-            "name": "Run npm start",
+            "name": "Python: FastAPI",
+            "type": "python",
             "request": "launch",
-            "type": "node-terminal"
+            "module": "uvicorn",
+            "args": [
+                "main:app",
+                "--reload"
+            ],
+            "jinja": true,
+            "justMyCode": true
         },
         {
             "name": "Python: Flask",
@@ -26,6 +32,12 @@
             ],
             "jinja": true,
             "justMyCode": true
+        },
+        {
+            "command": "npm start",
+            "name": "Run npm start",
+            "request": "launch",
+            "type": "node-terminal"
         },
         {
             "type": "msedge",

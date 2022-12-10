@@ -8,16 +8,49 @@
             <h1 class="text-white order-1 text-center text-[3rem] p-[auto]">{{params["title"]}}</h1>
             <h3 class="text-white text">{{params["description"]}}</h3>
         </div>
-
     </div>
-    <div class=" min-h-[100%] min-w-[100%]">
-        <div class="flex justify-center  flex-nowrap bg-i">
-            <div class="text-black bg-white p-3 min-w-[50%] text-center min-h-[50%] m-[2rem]">
-                <h1 class="font-extrabold text-4xl">Hello</h1>
-                <h3 class=""></h3>
+    <!-- Attributes of posts -->
+    {% for post in posts%}
+    <div class="flex flex-col justify-center mt-3">
+        <div class="flex flex-row justify-center">
+            <div class="bg-white w-1/2 p-[1.5rem] shadow-md">
+                <div class="post-preview">
+                    <a href="/posts">
+                        <h2 class="post-title">Man Must explore</h2>
+                        <h3 class="post-subtitle">test</h3>
+                    </a>
+                    <p class="post-meta">
+                        Posted by
+                        <a href="#!">rid</a>
+                        on today
+                    </p>
+                </div>
             </div>
         </div>
     </div>
+    {% endfor %}
+    <div class="flex flex-col justify-center mt-3">
+        <div class="flex flex-row justify-center">
+            <div class=" w-1/2 p-[1.5rem] shadow-md">
+                <div class="flex flex-row justify-end">
+                    <div class="text-white bg-[#2ea5bde8] border-[#0085A1]">
+                        <a href="/posts" class="uppercase bg-[#0085A1] border-[#0085A1] cursor-pointer btn"
+                            style="color: white;">older
+                            posts...</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div>
+        <div class="bg-white flex-col justify-center mb-4">
+            <div class="flex flex-row">
+                <a href="/posts" class="uppercase text-white bg-[#0085A1] border-[#0085A1] cursor-pointer btn">older
+                    posts...</a>
+            </div>
+        </div> -->
+    <!-- button for older posts -->
+
 </main>
 
 {% endblock %}

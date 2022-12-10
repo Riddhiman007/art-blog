@@ -2,31 +2,63 @@
 {% block content %}
 
 
+<!-- <main class="bg-[url('utils/david.jpg')]"> -->
 <main>
-    <div class="border-2 border-black w-1/2 inline-block h-[100%] box-content">
-        <form action="/courses" class="text-black" method="post">
-            <div>
-                <div class="text-black">
-                    <label for="name" class="font-black text-3xl">Name: </label><input type="text" name="Name"
-                        id="name">
-                </div>
-                <div>
-                    <label for="contact" class="font-black text-3xl">Contact: </label><input type="tel" name=""
-                        id="contact">
-                </div>
-                <div>
-                    <select name="course" id="course" onchange="course_desc()" class="font-black text-3xl">
-                        <option>Select Course</option>
-                        <option value="watercolor">watercolor</option>
-                    </select>
-                </div>
-                <div>
-                    <input type="submit" value="Submit" placeholder="Submit">
-                </div>
-            </div>
-        </form>
+    <div class="w-full h-[200%] font-black flex flex-col justify-center m-auto" style="background: url('/static/utils/david.jpg');
+        background-position: top;
+        background-attachment: local;
+        background-size: cover;">
+        <div class="h-[100%] m-[15%] text-center">
+            <h1 class="text-white order-1 text-center text-[3rem] p-[auto]">Courses</h1>
+            <h3 class="text-white text">"Practice make a man perferct"</h3>
+        </div>
+
     </div>
-    <div class="w-1/2 inline-block h-[100%]"></div>
+    <!-- 'https://wallpaperaccess.com/full/2606465.jpg') -->
+    <div class="h-[100%]">
+        <div class="border-[5px] w-[48%] h-[100%] bg-white border-solid p-4 bd-radius border-black left-0 inline-block box-border absolute shadow-slate-600 shadow-lg"
+            style="margin: 1rem 1.5rem;">
+            <form action="/courses" class="text-black" method="post">
+                <div>
+                    <div class="text-black mb-2">
+                        <label for="name" class="font-black text-3xl">Name: </label>
+                        <input type="text" name="Name" class="border-[1px] shadow-md border-solid border-black"
+                            id="name">
+                    </div>
+                    <div>
+                        <label for="contact" class="font-black text-3xl">Contact: </label><input type="tel" name=""
+                            id="contact">
+                    </div>
+                    <div>
+                        <label for="course" class="font-black text-3xl">Courses: </label>
+                        <select name="course" id="course" onchange="course_desc()" class="font-bold text-black">
+                            <option selected>Select Course</option>
+                            <option value="watercolor">watercolor</option>
+                            <option value="oil">Oil Color</option>
+                            <option value="slife">Still life</option>
+                            <option value="lsketch">Live sketch</option>
+                            <option value="portrait">Portrait</option>
+                            <option value="pastel">Pastel</option>
+                            <option value="cpencil">Color Pencil</option>
+                            <option value="psketch">Pencil Sketch</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="amt" class="font-black text-3xl">Amount: </label>
+                        <span id="amt"></span>
+                    </div>
+                    <div>
+                        <input type="submit" value="Submit" placeholder="Submit" class="font-black text-3xl">
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class=" w-[48%] border-[5px] h-[100%] bg-white border-solid bd-radius border-black inline-block right-0
+                            absolute shadow-slate-600 shadow-lg" style="margin: 1rem 1.5rem;">
+            <h1 class="text-slate-900 text-2xl">Watercolor</h1>
+        </div>
+    </div>
 </main>
 
 

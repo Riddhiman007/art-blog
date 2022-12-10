@@ -1,3 +1,4 @@
 {
-    "code-runner.customCommand": "npx tailwindcss -i static/css/input.css -o static/css/util.css --watch"
+    "code-runner.customCommand": "npx tailwindcss -i static/css/input.css -o static/css/util.css --watch",
+    "python.analysis.typeCheckingMode": "basic"
 }

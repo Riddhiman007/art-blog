@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/util.css') }}">
+    <link rel="stylesheet" href="/static/css/util.css">
     <title>Kalaspandan Art Gallery</title>
     <style>
         .background-url {
-            background: url("{{ url_for('static', filename='utils/ganesh.jpg') }}") no-repeat center content-box;
+            background: url("/static/utils/ganesh.jpg") no-repeat center content-box;
             background-attachment: local;
             background-size: cover;
             height: 100%;
@@ -18,7 +18,7 @@
 
 </head>
 
-<body class="h-[200%] ">
+<body class="h-[200%] back-color">
     <header class="bg-white">
         <div class="flex md:justify-between end">
             <div class="navbar flex justify-between items-center p-4 order-first md:hidden">
@@ -31,26 +31,26 @@
                 </div>
             </div>
             <div class="md:justify-end">
-                <nav class="text-[2rem] text-black flex justify-end md:flex-wrap m-[2rem]" style="list-style: none;"
+                <nav class="text-[1.5rem] text-black flex justify-end md:flex-wrap m-[1.5rem]" style="list-style: none;"
                     id="slidebar-hide">
                     <li class=""><a
-                            class="navbar-items m-[2rem] hover:underline hover:underline-offset-1 cursor-pointer"
+                            class="navbar-items m-[1.5rem] hover:underline hover:underline-offset-1 cursor-pointer"
                             href="/">Home</a></li>
                     <li class=""><a
-                            class="navbar-items m-[2rem] hover:underline hover:underline-offset-1 cursor-pointer"
+                            class="navbar-items m-[1.5rem] hover:underline hover:underline-offset-1 cursor-pointer"
                             href="/courses">Courses</a></li>
                     <li class=""><a
-                            class="navbar-items m-[2rem] hover:underline hover:underline-offset-1 cursor-pointer"
-                            href="#">Posts</a></li>
+                            class="navbar-items m-[1.5rem] hover:underline hover:underline-offset-1 cursor-pointer"
+                            href="/posts">Posts</a></li>
                     <li class=""><a
-                            class="navbar-items m-[2rem] hover:underline hover:underline-offset-1 cursor-pointer"
+                            class="navbar-items m-[1.5rem] hover:underline hover:underline-offset-1 cursor-pointer"
                             href="/info">About Us</a></li>
                 </nav>
             </div>
         </div>
     </header>
     {% block content %} {% endblock %}
-    <script src="{{url_for('static', filename='js/main.js')}}"></script>
+    <script src="/static/js/main.js"></script>
 </body>
 
 </html>
