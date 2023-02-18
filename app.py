@@ -35,13 +35,10 @@ def index():
 
 @app.route('/posts/<string:slug>', methods=['GET', 'POST'])
 def posts_slug(slug):
-    Post.query.filter(Post.slug==slug).first()
-    entry = Post(sno=1, title="test", sub_title="test", content="test", author="test")
-    db.session.add(entry)
-    db.session.commit()
-    return render_template("posts.html", params=params, posts=entry)
+    posts = Post.query.filter(Post.slug == slug).first()
+    return render_template("posts.html", params=params, posts=posts)
 
-@app.route('/posts/', methods=['GET', 'POST'])
+@app.route('/posts', methods=['GET', 'POST'])
 def posts():
     return render_template("posts.html", params=params)
 
