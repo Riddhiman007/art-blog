@@ -1,56 +1,127 @@
 <!DOCTYPE html>
-<html lang="en" class="text-black">
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/util.css">
-    <title>Kalaspandan Art Gallery</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Study Thunder - Expert Learning blog</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet"
+        type="text/css" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+        rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/static/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/bootstrap-5.3.0-alpha1/bootstrap-5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+    {% block style %} {% endblock %}
     <style>
-        .background-url {
-            background: url("/static/utils/ganesh.jpg") no-repeat center content-box;
-            background-attachment: local;
-            background-size: cover;
-            height: 100%;
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
         }
     </style>
-
 </head>
 
-<body class="h-[200%] back-color">
-    <header class="bg-white">
-        <div class="flex md:justify-between end">
-            <div class="navbar flex justify-between items-center p-4 order-first md:hidden">
-                <div class="flex justify-center items-center md:hidden">
-                    <div class="hamburger inline-block p-4 cursor-pointer md:hidden" id="activate" onclick="slidebar()">
-                        <div class="line h-0.5 w-6 my-1 bg-black"></div>
-                        <div class="line h-0.5 w-6 my-1 bg-black"></div>
-                        <div class="line h-0.5 w-6 my-1 bg-black"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="md:justify-end">
-                <nav class="text-[1.5rem] text-black flex justify-end md:flex-wrap m-[1.5rem]" style="list-style: none;"
-                    id="slidebar-hide">
-                    <li class=""><a
-                            class="navbar-items m-[1.5rem] hover:underline hover:underline-offset-1 cursor-pointer"
-                            href="/">Home</a></li>
-                    <li class=""><a
-                            class="navbar-items m-[1.5rem] hover:underline hover:underline-offset-1 cursor-pointer"
-                            href="/courses">Courses</a></li>
-                    <li class=""><a
-                            class="navbar-items m-[1.5rem] hover:underline hover:underline-offset-1 cursor-pointer"
-                            href="/posts">Posts</a></li>
-                    <li class=""><a
-                            class="navbar-items m-[1.5rem] hover:underline hover:underline-offset-1 cursor-pointer"
-                            href="/info">About Us</a></li>
-                </nav>
+<body>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark" id="mainNav" data-bs-theme="dark">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" id="brand" href="/" onfocus="toggle_color">Art Blog</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto py-4 py-lg-0">
+
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/" role="button">Home</a></li>
+                    <li class="nav-item dropdown"><a class="nav-link px-lg-3 py-3 py-lg-4 dropdown-toggle" href="#"
+                            id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Posts</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/post">Posts</a></li>
+                            <li><a class="dropdown-item" href="/MyPosts">My Posts</a></li>
+                            <li><a class="dropdown-item" href="/post/create">Create Posts</a></li>
+                        </ul>
+                    <li class="nav-item dropdown"><a class="nav-link px-lg-3 py-3 py-lg-4 dropdown-toggle" href="#"
+                            id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About
+                            Me</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/about">Me</a></li>
+                            <li><a class="dropdown-item" href="/user/login">Login</a></li>
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                            <li><a class="dropdown-item" href="/user/sign_up">Sign Up</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
-    </header>
+    </nav>
+
     {% block content %} {% endblock %}
+
+    <!-- Footer-->
+    <footer class="border-top">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <ul class="list-inline text-center">
+                        <li class="list-inline-item">
+                            <a href="{{params['tw_url']}}" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="{{params['fb_url']}}" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="{{params['gb_url']}}" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fas fa-circle fa-stack-2x secondary"></i>
+                                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="small text-center text-muted fst-italic">Copyright {{params['copyright']}} Your Website
+                        2022</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap core JS-->
+    <script src="/static/bootstrap-5.3.0-alpha1/bootstrap-5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="/static/js/scripts.js"></script>
+    <!-- My JS -->
     <script src="/static/js/main.js"></script>
+    <!-- Custom JS -->
+    {% block scripts %}
+    {% endblock %}
 </body>
 
 </html>

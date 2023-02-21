@@ -1,56 +1,54 @@
 {% extends "layout.html" %}
 {% block content %}
 
-
-<main id="home" class="">
-    <div class="w-full h-[200%] font-black background-url flex flex-col justify-center m-auto">
-        <div class="h-[100%] m-[15%] text-center">
-            <h1 class="text-white order-1 text-center text-[3rem] p-[auto]">{{params["title"]}}</h1>
-            <h3 class="text-white text">{{params["description"]}}</h3>
-        </div>
-    </div>
-    <!-- Attributes of posts -->
-    {% for post in posts%}
-    <div class="flex flex-col justify-center mt-3">
-        <div class="flex flex-row justify-center">
-            <div class="bg-white w-1/2 p-[1.5rem] shadow-md">
-                <div class="post-preview">
-                    <a href="/posts">
-                        <h2 class="post-title">Man Must explore</h2>
-                        <h3 class="post-subtitle">test</h3>
-                    </a>
-                    <p class="post-meta">
-                        Posted by
-                        <a href="#!">rid</a>
-                        on today
-                    </p>
+<!-- Page Header-->
+<header class="masthead" style="background-image: url('/static/img/ganesh.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>{{params['title']}}</h1>
+                    <span class="subheading">{{params['sub_title']}}</span>
                 </div>
             </div>
         </div>
     </div>
-    {% endfor %}
-    <div class="flex flex-col justify-center mt-3">
-        <div class="flex flex-row justify-center">
-            <div class=" w-1/2 p-[1.5rem] shadow-md">
-                <div class="flex flex-row justify-end">
-                    <div class="text-white bg-[#2ea5bde8] border-[#0085A1]">
-                        <a href="/posts" class="uppercase bg-[#0085A1] border-[#0085A1] cursor-pointer btn"
-                            style="color: white;">older
-                            posts...</a>
-                    </div>
-                </div>
+</header>
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        {% if msg %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert" id="success">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <strong>{{ msg }}</strong>
+        </div>
+        {% endif %}
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <!-- Post preview-->
+            <div class="post-preview">
+                <a href="/post">
+                    <h2 class="post-title">Man must explore, and this is exploration at its greatest</h2>
+                    <h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3>
+                </a>
+                <p class="post-meta">
+                    Posted by
+                    <a href="#!">Start Bootstrap</a>
+                    on September 24, 2022
+                </p>
             </div>
+            <!-- Divider-->
+
+            <!-- Divider-->
+            <hr class="my-4" />
+            <!-- Pager-->
+            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="/post">Older
+                    Posts →</a></div>
         </div>
     </div>
-    <!-- <div>
-        <div class="bg-white flex-col justify-center mb-4">
-            <div class="flex flex-row">
-                <a href="/posts" class="uppercase text-white bg-[#0085A1] border-[#0085A1] cursor-pointer btn">older
-                    posts...</a>
-            </div>
-        </div> -->
-    <!-- button for older posts -->
-
-</main>
-
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+    document.getElementById("success").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
+</script>
 {% endblock %}

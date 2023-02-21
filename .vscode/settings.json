@@ -1,4 +1,5 @@
 {
     "code-runner.customCommand": "npx tailwindcss -i static/css/input.css -o static/css/util.css --watch",
-    "python.analysis.typeCheckingMode": "basic"
+    "python.analysis.typeCheckingMode": "basic",
+    "python.formatting.blackPath": "C:\\Riddhiman\\Programming\\Projects\\Kalaspandan\\website\\web_env\\Scripts\\black.exe"
 }

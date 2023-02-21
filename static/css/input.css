@@ -125,3 +125,7 @@
 .post-preview>.post-meta>a {
     text-decoration: none;
 }
+
+.title {
+    font-family: Algerian, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}

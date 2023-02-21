@@ -4,11 +4,14 @@ function slidebar() {
 
 // js for form.html
 
-function course_desc() {
-    const wcolor = "you must pay &rupee500"
-    let crs = document.querySelector('select').value
-    amt = document.getElementById('amt')
-    if (crs == 'watercolor') {
-        amt.innerHTML = 1200
+const form_page = document.querySelector('.body')
+const computed_style = getComputedStyle(form_page)
+const brand = document.getElementById('brand')
+if (computed_style.backgroundColor == 'rgb(245, 245, 245)') {
+    const items = document.getElementsByClassName('nav-link')
+    for (let item of items) {
+        item.style.color = 'rgba(0, 0, 0, 0.9)'
     }
+    brand.style.color = 'rgba(0, 0, 0, 0.9)'
 }
+

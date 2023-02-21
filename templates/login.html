@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block style %}
+<link rel="stylesheet" href="/static/css/signin.css">
+{% endblock %}
+{% block content %}
+
+<div class="text-center body" id="form-page" data-bs-theme="dark">
+    <script>
+        const form_page = document.querySelector('.body')
+        const computed_style = getComputedStyle(form_page)
+        const brand = document.getElementById('brand')
+        const items = document.getElementsByClassName('nav-link')
+        if (computed_style.backgroundColor == 'rgb(245, 245, 245)') {
+            brand.style.color = 'rgba(0, 0, 0, 0.9)'
+            for (let item of items) {
+                item.style.color = 'rgba(0, 0, 0, 0.9)'
+            }
+        }
+    </script>
+    <main class="form-signin">
+        <form id="loginForm">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <strong>Access Token</strong>
+                <p id="loginStatus"></p>
+            </div>
+
+            <script>
+                var alertList = document.querySelectorAll('.alert');
+                alertList.forEach(function (alert) {
+                    new bootstrap.Alert(alert)
+                })
+            </script>
+
+            <img class="mb-4" src="/static/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+            <h1 class="h3 mb-3 fw-normal" style="color: black;">Please sign in</h1>
+
+            <div class="form-floating">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username">
+                <label for="floatingInput">Username</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                    name="password">
+                <label for="floatingPassword">Password</label>
+            </div>
+
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" id="loginSubmit" type="submit">Sign in</button>
+            <p class="mt-5 mb-3 text-muted">© 2017–2023</p>
+        </form>
+    </main>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script>
+    let token = undefined;
+    document.getElementById("loginSubmit").onclick = async () => {
+        const response = await fetch('/user/login/token', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: JSON.stringify('grant_type=&username=a&password=b&scope=&client_id=&client_secret=')
+        });
+    }
+
+</script>
+
+{% endblock %}

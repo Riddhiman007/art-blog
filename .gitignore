@@ -2,3 +2,7 @@ __pycache__
 .vs
 .vscode
 node_modules
+web_env
+static
+env
+bootstrap-5.0.2

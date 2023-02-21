@@ -10,25 +10,8 @@
             "request": "launch",
             "module": "uvicorn",
             "args": [
-                "main:app",
+                "backend.main:app",
                 "--reload"
-            ],
-            "jinja": true,
-            "justMyCode": true
-        },
-        {
-            "name": "Python: Flask",
-            "type": "python",
-            "request": "launch",
-            "module": "flask",
-            "env": {
-                "FLASK_APP": "app.py",
-                "FLASK_DEBUG": "1"
-            },
-            "args": [
-                "run",
-                "--debugger",
-                "--no-reload"
             ],
             "jinja": true,
             "justMyCode": true
@@ -39,11 +22,5 @@
             "request": "launch",
             "type": "node-terminal"
         },
-        {
-            "type": "msedge",
-            "request": "launch",
-            "name": "Open layout.html",
-            "file": "c:\\Riddhiman\\Programming\\Projects\\Kalaspandan\\website\\templates\\layout.html"
-        }
     ]
 }

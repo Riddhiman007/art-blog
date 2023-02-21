@@ -1,0 +1,19 @@
+{
+    "params": {
+        "title": "Kalaspandan Art Gallery",
+        "description": "A hub for mastering art",
+        "local_server": "True",
+        "fb_url": "facebook.com/studythunder",
+        "tw_url": "https://twitter.com/studythunder",
+        "gb_url": "https://github.com/studythunder",
+        "sub_title": "A Blog for workaholic Students",
+        "copyright": "Copyright Your Website"
+    },
+    "smtp": {
+        "server": "smtp.gmail.com",
+        "username": "rid56593@gmail.com",
+        "password": "mybvxzyhiyquirpz",
+        "port": "465",
+        "encryption": "ssl"
+    }
+}
