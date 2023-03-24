@@ -1,5 +1,45 @@
 {
-    "code-runner.customCommand": "npx tailwindcss -i static/css/input.css -o static/css/util.css --watch",
-    "python.analysis.typeCheckingMode": "basic",
-    "python.formatting.blackPath": "C:\\Riddhiman\\Programming\\Projects\\Kalaspandan\\website\\web_env\\Scripts\\black.exe"
+  "code-runner.customCommand": "npx tailwindcss -i static/css/input.css -o static/css/util.css --watch",
+  "python.analysis.typeCheckingMode": "basic",
+  "python.formatting.blackPath": "C:\\Riddhiman\\Programming\\Projects\\Kalaspandan\\website\\web_env\\Scripts\\black.exe",
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.hovers": true,
+  "editor.quickSuggestions": {
+    "other": "on",
+    "comments": "off",
+    "strings": "on"
+  },
+  "tailwindCSS.classAttributes": ["class", "className", "ngClass"],
+  "tailwindCSS.includeLanguages": {
+    "javascript": "html"
+  },
+  "css.validate": false,
+  "css.format.enable": true,
+  "files.associations": {
+    ".css": "tailwindcss"
+  },
+  "tailwindCSS.experimental.configFile": {
+    "frontend/tailwind.config.js": [
+      "frontend/src/***/**/*",
+      "frontend/src/**/*"
+    ]
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "eslint.lintTask.options": "-c ./frontend/.eslintrc.json",
+  "eslint.options": { "overrideConfigFile": "./frontend/.eslintrc.json" },
+  "eslint.workingDirectories": ["./frontend"],
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "eslint.enable": true,
+  "eslint.format.enable": true
 }

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Study Thunder - Expert Learning blog</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet"
+        type="text/css" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+        rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/static/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/bootstrap-5.3.0-alpha1/bootstrap-5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+    {% block style %} {% endblock %}
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation-->
+    <!-- <button class="flex flex-wrap list-reset pl-0 mb-0bar-toggler" type="button" data-bs-toggle="flex-growlapse" data-bs-target="#relative flex flex-wrap items-center content-between py-2 px-4Responsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+    </button> -->
+    <!-- <ul class=" absolute pin-l z-50 float-left hidden list-reset	 py-2 mt-1 text-base bg-white border border-grey-light rounded">
+        <li><a class="block w-full py-1 px-6 font-normal text-grey-darkest whitespace-no-wrap border-0" href="/post">Posts</a></li>
+        <li><a class="block w-full py-1 px-6 font-normal text-grey-darkest whitespace-no-wrap border-0" href="/MyPosts">My Posts</a></li>
+        <li><a class="block w-full py-1 px-6 font-normal text-grey-darkest whitespace-no-wrap border-0" href="/post/create">Create Posts</a></li>
+    </ul> -->
+    <!-- <ul class=" absolute pin-l z-50 float-left hidden list-reset	 py-2 mt-1 text-base bg-white border border-grey-light rounded">
+        <li><a class="block w-full py-1 px-6 font-normal text-grey-darkest whitespace-no-wrap border-0" href="/about">Me</a></li>
+        <li><a class="block w-full py-1 px-6 font-normal text-grey-darkest whitespace-no-wrap border-0" href="/user/login">Login</a></li>
+        <li><a class="block w-full py-1 px-6 font-normal text-grey-darkest whitespace-no-wrap border-0" href="/logout">Logout</a></li>
+        <li><a class="block w-full py-1 px-6 font-normal text-grey-darkest whitespace-no-wrap border-0" href="/user/sign_up">Sign Up</a></li>
+    </ul> -->
+    <nav class="flex flex-wrap list-reset pl-0 mb-0bar navbar-expand-lg navbar-dark" id="mainNav" data-bs-theme="dark">
+        <div class="container mx-auto px-4 px-lg-5">
+            <a class="flex flex-wrap list-reset pl-0 mb-0bar-brand" id="brand" href="/" onfocus="toggle_color">Art
+                Blog</a>
+            <div class="flex-growlapse flex flex-wrap list-reset pl-0 mb-0bar-collapse"
+                id="relative flex flex-wrap items-center content-between py-2 px-4Responsive">
+                <ul class="flex flex-wrap list-reset pl-0 mb-0bar-nav ms-auto py-4 py-lg-0">
+                    <li class=""><a class="inline-block py-2 px-4 no-underline px-lg-3 py-3 py-lg-4" href="/"
+                            role="button">Home</a></li>
+                    <li class=""><a
+                            class="inline-block py-2 px-4 no-underline px-lg-3 py-3 py-lg-4  inline-block w-0 h-0 ml-1 align border-b-0 border-t-1 border-r-1 border-l-1"
+                            href="#">Posts</a>
+                    <li class=""><a
+                            class="inline-block py-2 px-4 no-underline px-lg-3 py-3 py-lg-4  inline-block w-0 h-0 ml-1 align border-b-0 border-t-1 border-r-1 border-l-1"
+                            href="#">AboutMe</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% block content %} {% endblock %}
+    <!-- Footer-->
+    <footer class="border-t">
+        <div class="container mx-auto px-4 px-lg-5">
+            <div class="flex flex-wrap gx-4 gx-lg-5 justify-content-center">
+                <div class="md:w-1/6 pr-4 pl-40 lg:w-2/3 pr-4 pl-4 xl:w-3/5 pr-4 pl-4">
+                    <ul class="list-inline text-center">
+                        <li class="list-inline-item">
+                            <a href="{{params['tw_url']}}" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="{{params['fb_url']}}" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="{{params['gb_url']}}" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fas fa-circle fa-stack-2x secondary"></i>
+                                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="text-sm text-center text-grey fst-italic">Copyright {{params['copyright']}} Your Website
+                        2022</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap core JS-->
+    <script src="/static/bootstrap-5.3.0-alpha1/bootstrap-5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="/static/js/scripts.js"></script>
+    <!-- My JS -->
+    <script src="/static/js/main.js"></script>
+    <!-- Custom JS -->
+    {% block scripts %}
+    {% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+/* register form */
+.register .text {
+  @apply mb-4 flex w-full flex-row gap-2 rounded-sm border-b-2 border-b-gray-300;
+}
+.register .text:focus-within {
+  @apply border-b-zinc-800;
+}
+.register {
+  @apply w-full;
+}
+
+/* text email and password inputs */
+.register .text input[type="text"],
+.register .text input[type="email"],
+.register .text input[type="password"] {
+  @apply w-[100%] bg-inherit py-2 pl-2;
+}
+
+/* icons */
+.register .text > span {
+  @apply my-auto;
+}
+
+/* inputs on focus */
+.register .text input[type="text"]:focus-visible,
+.register .text input[type="email"]:focus-visible,
+.register .text input[type="password"]:focus-visible {
+  @apply outline-none;
+  /* @apply border-b-2 border-b-slate-900 outline-transparent; */
+}
+
+/* submit */
+.register .submit {
+  @apply flex flex-row items-end justify-end;
+}
+.register .submit button[type="submit"] {
+  @apply rounded-md bg-blue-600 px-4 py-2 font-medium text-slate-50 hover:bg-blue-800;
+}

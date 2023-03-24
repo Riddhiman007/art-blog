@@ -5,7 +5,11 @@
     "build": "webpack --mode production --stats-error-details"
   },
   "devDependencies": {
-    "tailwindcss": "^3.2.1"
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.21",
+    "postcss-import": "^15.1.0",
+    "postcss-nesting": "^11.2.1",
+    "tailwindcss": "^3.2.7"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-adapter-ckfinder": "^35.4.0",
@@ -47,15 +51,15 @@
     "@ckeditor/ckeditor5-typing": "^35.4.0",
     "@ckeditor/ckeditor5-watchdog": "^35.4.0",
     "@ckeditor/ckeditor5-word-count": "^35.4.0",
-    "autoprefixer": "^10.4.13",
+    "@next/bundle-analyzer": "^13.2.4",
     "bootstrap": "^5.0.2",
     "ckeditor5-custom-build": "^0.0.6",
     "css-loader": "^5.2.7",
     "http": "^0.0.1-security",
     "node-fetch": "^3.3.0",
     "npm-run-all": "^4.1.5",
-    "postcss": "^8.4.20",
     "postcss-loader": "^4.3.0",
+    "postcss-preset-env": "^8.0.1",
     "raw-loader": "^4.0.2",
     "security-holder": "^1.0.1",
     "style-loader": "^2.0.0",
@@ -64,6 +68,7 @@
     "unsplash-js": "^7.0.15",
     "vite": "^3.2.4",
     "webpack": "^5.75.0",
+    "webpack-bundle-analyzer": "^4.8.0",
     "webpack-cli": "^4.10.0"
   },
   "name": "website",

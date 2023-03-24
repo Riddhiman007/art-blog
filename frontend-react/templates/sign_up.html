@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block content %}
+<header class="masthead">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="post-heading">
+                    <h1>Sign Up</h1>
+                    <h2 class="subheading">Want to become a member of our blog? Then create your own account and connect
+                        with us.</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<main class="flex justify-center align-middle container-fluid">
+    <div class="container-sm bg-white bg-gradient">
+
+        {% for error in errors %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+            <strong>{{ error }}</strong>
+        </div>
+
+        {% endfor %}
+
+        <div class="flex container justify-center">
+            <form id="registerForm" action="/user/sign_up" method="post" autocomplete="on"
+                enctype="multipart/form-data">
+
+                <div class="mb-3">
+                    <label for="fullname" class="form-label">Full name</label>
+                    <input type="text" class="form-control" id="fullname" placeholder="Your full name" name="fullname">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email">
+                </div>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" placeholder="Your Username" name="username">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Your Password"
+                        name="password">
+                </div>
+                <div class="mb-3">
+                    <input class="btn btn-primary" id="registerSubmit" type="submit" value="Submit">
+                </div>
+
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock %}

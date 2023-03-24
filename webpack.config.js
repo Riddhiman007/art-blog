@@ -12,7 +12,7 @@ module.exports = {
     // https://webpack.js.org/configuration/output/
     output: {
         path: path.resolve(__dirname, 'static/dist'),
-        filename: 'bundle.js'
+        filename: 'ckeditor.js'
     },
 
     module: {

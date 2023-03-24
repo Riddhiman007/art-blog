@@ -13,6 +13,7 @@ import os
 from ..core.auth.authorize import verify_user, get_current_user
 from ..core.auth.jwt_handler import encodeJWT, token_response
 from ..core.schemas.user import Users, UsersCreate, Login
+from ..core.schemas.token import Token
 from ..core.models.users import User
 from ..core.exc.exceptions import InvalidCredentialsException
 from ..utils.hash_pass import get_hashed_password, verify_password
@@ -73,7 +74,7 @@ async def login_for_access_token(user_details:OAuth2PasswordRequestForm=Depends(
     if login==True:
         try:
             access_token = encodeJWT(user.username)
-            print("logged in suucceesfully")
+            print("logged in successfully")
         except Exception as e:
             print(e)
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials. Please check your credentials or sign up for your account.")
@@ -83,25 +84,40 @@ async def login_for_access_token(user_details:OAuth2PasswordRequestForm=Depends(
         raise HTTPException(status.HTTP_404_NOT_FOUND, detail="Invalid username or password")
              
     
-# @router.post('/login')
-# async def sign_in(user_details:OAuth2PasswordRequestForm=Depends(), session:AsyncSession=Depends(get_session)):
-#     user = await get_user(session, user_details.username)
+@router.post('/login', response_model=Token)
+async def sign_in(user_details:OAuth2PasswordRequestForm=Depends(), session:AsyncSession=Depends(get_session)):
+    user = await get_user(user_details.username, session)
     
-#     password = user.password_hash
-#     if type(password)==HTTPException:
-#         raise InvalidCredentialsException
-#     login:bool = False
-#     if user:
-#         if verify_password(user_details.password, password):
-#             login = True
-#         else:
-#             login = False
-#             raise HTTPException(404, 'invalid password')
-#     else:
-#         login = False
-#         raise HTTPException(404, 'invalid username')
+    password = user.password_hash
+    if type(password)==HTTPException:
+        raise InvalidCredentialsException
+    login:bool = False
+    if user:
+        if verify_password(user_details.password, password):
+            login = True
+        else:
+            login = False
+            raise HTTPException(404, 'invalid password')
+    else:
+        login = False
+        raise HTTPException(404, 'invalid username')
   
-#     if login==True:
-#         response = RedirectResponse('/?msg=Login Successful')
-#         await login_for_access_token()
-#         return response
+    if login==True:
+        try:
+            access_token = encodeJWT(user.username)
+            print("logged in successfully")
+        except Exception as e:
+            print(e)
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials. Please check your credentials or sign up for your account.")
+        else: 
+            res = {"id": user.id,
+                "name": user.FullName,
+                "username": user.username,
+                "email": user.email,
+                "access_token": access_token,
+                "token_type":"Bearer"}
+            print(res)
+            return res
+    else:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, detail="Invalid username or password")
+             
