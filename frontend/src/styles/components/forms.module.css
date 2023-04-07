@@ -1,38 +1,88 @@
-/* register form */
-.register .text {
-  @apply mb-4 flex w-full flex-row gap-2 rounded-sm border-b-2 border-b-gray-300;
-}
-.register .text:focus-within {
-  @apply border-b-zinc-800;
-}
+/* register page */
 .register {
-  @apply w-full;
+  @apply bg-zinc-100 p-4;
 }
 
-/* text email and password inputs */
-.register .text input[type="text"],
-.register .text input[type="email"],
-.register .text input[type="password"] {
-  @apply w-[100%] bg-inherit py-2 pl-2;
+.login {
+  @apply mx-11 rounded-md bg-zinc-100 py-6 px-6 shadow-lg shadow-sky-600;
 }
 
-/* icons */
-.register .text > span {
-  @apply my-auto;
+/* input outer box */
+.input {
+  @apply mb-4;
 }
 
-/* inputs on focus */
-.register .text input[type="text"]:focus-visible,
-.register .text input[type="email"]:focus-visible,
-.register .text input[type="password"]:focus-visible {
-  @apply outline-none;
-  /* @apply border-b-2 border-b-slate-900 outline-transparent; */
+.text:focus-within {
+  @apply border-b-2 border-b-gray-900;
+}
+
+/* input inner box */
+.input .text {
+  @apply z-[5] flex flex-row gap-2 rounded border-b-2  border-b-slate-400 bg-zinc-100;
+}
+.input .text:focus-within {
+  @apply border-b-slate-800;
+}
+
+/* input element */
+.input .text input {
+  @apply z-[3] w-full bg-zinc-100 p-2 text-base text-slate-800;
+}
+
+.input .text input::placeholder {
+  @apply text-neutral-600;
+}
+.input .text input:focus {
+  @apply z-0 outline-0;
+}
+
+/* icons  */
+.input .text span {
+  @apply flex flex-col items-center justify-center p-2;
+}
+
+.input:focus-within .text span .icon {
+  @apply text-gray-900;
+}
+
+.input .text span .icon {
+  @apply items-center  text-gray-600;
 }
 
 /* submit */
-.register .submit {
-  @apply flex flex-row items-end justify-end;
+.submit {
+  @apply mt-2 flex flex-row justify-between;
 }
-.register .submit button[type="submit"] {
-  @apply rounded-md bg-blue-600 px-4 py-2 font-medium text-slate-50 hover:bg-blue-800;
+
+.submit button[type="submit"] {
+  @apply rounded-md bg-blue-600 px-4 py-2 text-blue-50 shadow shadow-zinc-400;
+}
+
+.submit button[type="submit"]:hover,
+.submit button[type="submit"]:focus,
+.submit button[type="submit"]:active {
+  @apply bg-blue-800 shadow-inner shadow-blue-900 outline-transparent;
+}
+
+/* errors */
+.input > .error {
+  @apply ml-12 mt-1 bg-zinc-100 text-red-600;
+}
+
+/* Alternate message for login or register */
+.submit .message a {
+  @apply text-zinc-800 underline;
+}
+/* hover state of messge */
+.submit .message a:hover,
+.submit .message a:active {
+  @apply text-blue-700 no-underline;
+}
+.submit .message a:focus {
+  @apply text-blue-700;
+}
+
+/* login page register message */
+.login .submit .message {
+  @apply ml-1;
 }

@@ -3,12 +3,10 @@ from sqlalchemy import select
 from sqlalchemy.orm import aliased
 from sqlalchemy.ext.asyncio import AsyncSession
 from ..models.posts import Post
-from ..schemas.post import Posts
+from ..schemas.post import Posts, PostCreate
 
-async def creates_new_blog(img:bytes|None, session:AsyncSession , request:Posts):
-    new_entry = Post(**request.dict())
-    if img:
-        new_entry = Post(img=img, **request.dict())
+async def creates_new_blog( session:AsyncSession , request:PostCreate, author_id:int):
+    new_entry = Post(**request.dict(), author_id=author_id)
     session.add(new_entry)
     await session.commit()
     await session.refresh(new_entry)

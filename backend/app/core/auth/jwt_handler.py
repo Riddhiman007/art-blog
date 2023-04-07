@@ -20,7 +20,7 @@ def encodeJWT(username):
 def decodeJWT(token:str):
     try:
         decode_token = jwt.decode(token, jwt_secret, [algorithm])
-        return decode_token if decode_token['exp'] >= datetime.utcnow() else 'Login Expired' 
+        return decode_token # if decode_token['exp'] >= datetime.utcnow() else 'Login Expired' 
     except Exception as e:
         print(e)
         

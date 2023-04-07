@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Request, Depends, status
+from fastapi.responses import ORJSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -9,15 +10,17 @@ from typing import Optional
 
 # self imports 
 from .app.utils.dependency import params, get_session
-from .app.routes import post, user
+from .app.routes import post, user, img
 from .app.core.base.base import init_db, close_db
 from .app.core.queries.post import get_blog_by_id, get_blog
 from .app.core.errors.errors import err
 from .app.core.auth.authorize import get_current_user
 
-app = FastAPI(routes=[Mount("/static", StaticFiles(directory="static"), name="static"),Route('/error', err)],)
+app = FastAPI(routes=[Mount("/static", StaticFiles(directory="static"), name="static"),Route('/error', err)],
+              debug=True, default_response_class=ORJSONResponse)
 app.include_router(user.router)
 app.include_router(post.router)
+app.include_router(img.router)
 
 app.add_middleware(
     CORSMiddleware,

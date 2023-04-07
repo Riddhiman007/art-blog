@@ -26,6 +26,28 @@ function Sidebar() {
         sidebar.classList.add("go-down");
       }
     });
+    let scrollPos = 0;
+    const headerHeight = sidebar.clientHeight;
+    window.addEventListener("scroll", function () {
+      const currentTop = document.body.getBoundingClientRect().top * -1;
+      if (currentTop < scrollPos) {
+        // Scrolling Up
+        if (currentTop > 0 && sidebar.classList.contains("go-up")) {
+          sidebar.classList.add("go-down");
+        } else {
+          console.log(123);
+          sidebar.classList.remove("go-down", "go-up");
+          sidebar.classList.add("go-down");
+        }
+      } else {
+        // Scrolling Down
+        sidebar.classList.remove(["go-down"]);
+        if (currentTop > headerHeight && !sidebar.classList.contains("go-up")) {
+          sidebar.classList.add("go-up");
+        }
+      }
+      scrollPos = currentTop;
+    });
   });
   const { data } = useSession();
   return (
@@ -41,41 +63,45 @@ function Sidebar() {
 
         {/* Sidebar panel */}
         <div
-          className="sidebar-trans lg:ui-not-open:panel-right ui-not-open:panel-left fixed top-0 left-0 z-50 !block h-full w-1/2 overflow-y-auto overflow-x-hidden bg-slate-100 md:w-40 lg:w-60 xxl:w-[20rem]"
+          className="sidebar-trans go-up fixed top-0 left-0 z-50 !block h-full w-1/2 overflow-y-auto overflow-x-hidden bg-slate-100 ui-not-open:-translate-x-96 md:w-40 lg:w-72 lg:ui-not-open:translate-x-0 xxl:w-[20rem]"
           id="sidebar"
         >
           <div key="user-info" className="container border-r-2">
             {/* avatar */}
-            <div key="avatar" className="flex flex-col justify-center gap-2 p-12">
-              <div className="flex flex-row justify-center">
-                <Image
-                  width={80}
-                  height={80}
-                  className="m-auto inline-block h-[5rem] w-[5rem] rounded-full ring-2 ring-white"
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                  // src="/img/logos/k_favicon.ico"
-                  alt=""
-                />
-              </div>
-
-              {/* user details */}
-              <div className="flex flex-row items-center">
-                <div className="flex flex-col items-start">
-                  {/* Fullname */}
-                  <h3 className=" mx-auto text-xl font-bold text-stone-800">
-                    Riddhiman Choudhary
-                  </h3>
-                  <div className="">
-                    {/* Username */}
-                    <span className="ml-4 block italic text-stone-500">riddhi</span>
-                    {/* Email */}
-                    <span className="mt-2 ml-4 block text-lg font-thin text-stone-500">
-                      basu@gmail.com
-                    </span>
+            {
+              /* user details */
+              data ? (
+                <div key="avatar" className="flex flex-col justify-center gap-2 p-12">
+                  <div className="flex flex-row justify-center">
+                    <Image
+                      width={80}
+                      height={80}
+                      className="m-auto inline-block h-[5rem] w-[5rem] rounded-full ring-2 ring-white"
+                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      // src="/img/logos/k_favicon.ico"
+                      alt=""
+                    />
+                  </div>
+                  <div className="flex flex-row items-center">
+                    <div className="flex flex-col items-start">
+                      {/* Fullname */}
+                      <h3 className="mb-0 block text-center font-serif text-lg font-semibold text-stone-800 lg:text-center lg:text-xl">
+                        {data.user.FullName}
+                      </h3>
+                      {/* Email */}
+                      <div className="my-2 block text-center font-sans text-base text-stone-700">
+                        {data.user.email}
+                      </div>
+                      {/* Username */}
+                      <p className="ml-1 block text-center text-base text-stone-500">
+                        {data.user.username}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
+              ) : null
+            }
+
             {/* nav items */}
             <hr
               key="hierchy"
@@ -122,7 +148,7 @@ function Sidebar() {
                 <Menu>
                   <Menu.Button
                     as="div"
-                    className="group z-50 mb-2 bg-slate-100 px-4 py-2 outline-transparent focus-within:bg-neutral-900 hover:rounded-lg hover:bg-neutral-900 hover:shadow-xl hover:shadow-neutral-900 focus:rounded-lg"
+                    className="group z-50 mb-2 bg-slate-100 px-4 py-2 outline-transparent focus-within:bg-neutral-900 hover:rounded-lg hover:bg-neutral-900 hover:shadow-xl hover:shadow-neutral-700 focus:rounded-lg"
                   >
                     <div className="my-auto flex flex-row items-stretch gap-3 text-neutral-700 shadow-neutral-900 group-hover:bg-neutral-900 group-hover:text-neutral-50 group-focus:bg-neutral-900 group-focus:text-neutral-50">
                       <FontAwesomeIcon
@@ -166,7 +192,7 @@ function Sidebar() {
                 </Menu>
                 {/* Create Post */}
                 <Link
-                  href="/"
+                  href="/posts/create"
                   className="group  mb-2 bg-slate-100 px-4 py-2 outline-transparent focus-within:rounded-lg focus-within:bg-neutral-900 hover:z-30 hover:rounded-lg hover:bg-neutral-900 hover:shadow-lg hover:shadow-neutral-700"
                 >
                   <div className="my-auto flex flex-row items-stretch gap-3 text-neutral-700 shadow-neutral-900 group-hover:bg-neutral-900 group-hover:text-neutral-50 group-focus:bg-neutral-900 group-focus:text-neutral-50">

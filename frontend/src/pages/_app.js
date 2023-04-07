@@ -2,7 +2,8 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
-import "../styles/globals.css";
+// import "@ckeditor/ckeditor5-editor-classic/theme/classiceditor.css"
+import "../styles/globals.css"
 import Sidebar from "../components/Sidebar";
 import { SessionProvider } from 'next-auth/react';
 
@@ -13,7 +14,7 @@ export default function App({ Component, pageProps }) {
     <SessionProvider>
       <Sidebar />
       <Navbar />
-      <div className="xxl:!ml-[20rem] lg:mt-[83px] lg:!ml-60 bg-slate-100">
+      <div className="xxl:!ml-[20rem] lg:mt-[83px] lg:!ml-72 bg-slate-100">
         <Component { ...pageProps } />
         <Footer />
       </div>

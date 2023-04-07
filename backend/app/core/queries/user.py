@@ -27,7 +27,7 @@ async def create_user(session:AsyncSession, user:UsersCreate):
     # fetch_user = await get_user(session, user.username)
     # if fetch_user.username==user.username: # type: ignore
     #     raise UserAlreadyExistsException
-    new_entry = User(FullName=user.FullName, email=user.email, slug=user.slug, username=user.username)
+    new_entry = User(FullName=user.FullName, email=user.email, username=user.username)
     new_entry.password = user.password
     session.add(new_entry)
     await session.commit()

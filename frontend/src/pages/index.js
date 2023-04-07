@@ -5,7 +5,8 @@ import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 import Link from "next/link";
 
-// import css
+// import image
+import Ganesh from "../static/img/ganesh.jpg";
 
 const inter = Inter({ subsets: [ "latin" ] });
 
@@ -18,7 +19,8 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/img/logos/k_favicon.ico" />
       </Head>
-      <Header title="Art Blog">
+      <Header image={ Ganesh }>
+        <h1 className="[font-size:_3rem] lg:[font-size:5rem]">Art blog</h1>
         <h2 className="sub-heading">Dream Blog for Artists</h2>
       </Header>
       <main className="mb-12">

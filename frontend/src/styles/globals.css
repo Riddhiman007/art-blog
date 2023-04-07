@@ -1,9 +1,9 @@
 @tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer components {
-  /* navbar start */
   .navbar {
     --bs-navbar-padding-x: 0;
     --bs-navbar-padding-y: 0.5rem;
@@ -151,7 +151,8 @@
     #mainNav.is-fixed {
       /* when the user scrolls down, we hide the header right above the viewport */
       position: fixed;
-      top: -83px;
+      top: 0px;
+      transform: translateY(-83px);
       transition: transform 0.2s;
       border-bottom: 1px solid white;
       background-color: rgba(255, 255, 255, 0.9);
@@ -185,9 +186,8 @@
 
     #mainNav.is-visible {
       /* if the user changes the scrolling direction, we show the header */
-      transform: translate3d(0, 100%, 0);
+      transform: translate3d(0, 0%, 0);
     }
-    /* navbar end */
   }
 
   @screen lg {
@@ -202,10 +202,6 @@
 
   .sidebar-trans {
     transition: transform 0.2s;
-  }
-
-  .sidebar-trans {
-    @apply transition-[width];
   }
 
   .row {
@@ -347,11 +343,11 @@ ul ul {
   }
 
   .go-up {
-    @apply !translate-y-0;
+    transform: translate3d(0, 0, 0);
   }
 
   .go-down {
-    @apply !translate-y-[83px];
+    transform: translate3d(0, 83px, 0);
   }
 }
 
@@ -390,17 +386,28 @@ a {
   @apply mr-2;
 }
 
-@layer components {
-  /* hiding scrollbar in sidebar */
-  #sidebar::-webkit-scrollbar {
-    display: none !important;
-  }
+.panel-left {
+  transform: translateX(-100rem) !important;
+}
 
-  /* side panel left */
-  .panel-left {
-    transform: translateX(-24rem);
-  }
-  .panel-right {
-    transform: translateX(0);
-  }
+.panel-right {
+  transform: translateX(0);
+}
+
+#sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+/* submit */
+.submit {
+  @apply flex flex-row justify-end;
+}
+
+.submit button[type="submit"] {
+  @apply rounded-md bg-blue-600 px-4 py-2 text-blue-50 shadow shadow-blue-400;
+}
+.submit button[type="submit"]:hover,
+.submit button[type="submit"]:focus,
+.submit button[type="submit"]:active {
+  @apply bg-blue-800 shadow-inner shadow-blue-900 outline-transparent;
 }

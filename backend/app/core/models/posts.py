@@ -1,9 +1,9 @@
-from sqlalchemy import func, Text
+from sqlalchemy import func, Text, ForeignKey, Integer
 from sqlalchemy.dialects.mysql import LONGBLOB
 from sqlalchemy.orm import relationship, mapped_column, Mapped
 
 from ..base.base import Base
-from .users import User
+
 from datetime import date
  # model for making tables
 
@@ -17,7 +17,7 @@ class Post(Base):
     img:Mapped[bytes] = mapped_column(nullable=True)
     slug:Mapped[str] = mapped_column(Text)
     creation_time:Mapped[date] = mapped_column(default=func.now())
-    # author = relationship('users', back_populates='posts')
-    # author_id = Column(Integer, ForeignKey('users.id'))
+    author_id:Mapped[int] = mapped_column(Integer, ForeignKey('users.id'))
+    author = relationship('User',back_populates='posts')
     
     

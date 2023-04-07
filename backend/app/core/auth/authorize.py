@@ -13,7 +13,7 @@ from ..schemas.user import Login
 from ..queries.user import get_user
 from ...utils.hash_pass import verify_password
 
-oauth2_scheme = OAuth2PasswordBearer('/user/login/token')
+oauth2_scheme = OAuth2PasswordBearer('/user/login')
 
 async def get_current_user(token:str=Depends(oauth2_scheme), session:AsyncSession=Depends(get_session)):
     payload = jwt.decode(token, jwt_secret, [algorithm]) # type:ignore

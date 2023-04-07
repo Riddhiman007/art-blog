@@ -3,7 +3,7 @@
 import Link from "next/link";
 import React from "react";
 
-import NavbarConfig from "../scripts/navbar";
+import NavbarConfig from "../static/scripts/navbar";
 
 export default function Navbar() {
   React.useEffect(() => NavbarConfig(document.getElementById("mainNav")));
@@ -18,28 +18,21 @@ export default function Navbar() {
         </a>
         <div className="hidden h-[66px] flex-grow align-middle lg:!flex lg:basis-auto">
           <ul className="navbar-nav !ml-auto !py-6 lg:flex-row lg:!py-0">
-              <li key='home' className="nav-item">
-                <Link
-                  className="nav-link py-4 lg:!px-4 lg:!py-6"
-                  href='/'>
-                  Home
-                </Link>
-              </li>
-              <li key='Post' className="nav-item">
-                <Link
-                  className="nav-link py-4 lg:!px-4 lg:!py-6"
-                  href='/'>
-                  Post
-                </Link>
-              </li>
-              <li key='About' className="nav-item">
-                <Link
-                  className="nav-link py-4 lg:!px-4 lg:!py-6"
-                  href='/'>
-                  About
-                </Link>
-              </li>
-          
+            <li key="home" className="nav-item">
+              <Link className="nav-link py-4 lg:!px-4 lg:!py-6" href="/">
+                Home
+              </Link>
+            </li>
+            <li key="Post" className="nav-item">
+              <Link className="nav-link py-4 lg:!px-4 lg:!py-6" href="/">
+                Post
+              </Link>
+            </li>
+            <li key="About" className="nav-item">
+              <Link className="nav-link py-4 lg:!px-4 lg:!py-6" href="/">
+                About
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

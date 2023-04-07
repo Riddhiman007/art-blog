@@ -7,11 +7,11 @@ const { styles } = require('@ckeditor/ckeditor5-dev-utils');
 
 module.exports = {
     // https://webpack.js.org/configuration/entry-context/
-    entry: './static/js/editor.js',
+    entry: './frontend/src/components/neweditor.js',
 
     // https://webpack.js.org/configuration/output/
     output: {
-        path: path.resolve(__dirname, 'static/dist'),
+        path: path.resolve(__dirname, 'frontend/src/components/editor/build'),
         filename: 'ckeditor.js'
     },
 

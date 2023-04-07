@@ -1,9 +1,9 @@
 from sqlalchemy import Text
 from sqlalchemy.dialects.mysql import INTEGER
 from sqlalchemy.orm import relationship, mapped_column, Mapped
-
 from ..base.base import Base
 from ...utils.hash_pass import get_hashed_password, verify_password
+
 
 class User(Base):
     __tablename__ = "users"
@@ -11,10 +11,9 @@ class User(Base):
     FullName:Mapped[str] = mapped_column(Text)
     username:Mapped[str] = mapped_column(Text)
     # contact = Column(INTEGER)
-    slug:Mapped[str] = mapped_column(Text)
     email:Mapped[str] = mapped_column(Text)
     password_hash:Mapped[str] = mapped_column(Text)
-    # posts = relationship('posts', back_populates='author')
+    posts = relationship('Post',back_populates='author')
     
     @property
     def password(self):
