@@ -24,7 +24,7 @@ export default function CreatePost() {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <Header>
+        <Header className="!bg-gradient-to-tr !from-blue-900 !via-purple-700 !to-teal-900">
           <div className="flex flex-col flex-wrap items-center gap-2">
             <h1>
               <input
