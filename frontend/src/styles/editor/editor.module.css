@@ -1,0 +1,4 @@
+/* Lexical editor themes */
+.ltr {
+  @apply text-left;
+}
