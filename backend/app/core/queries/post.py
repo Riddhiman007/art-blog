@@ -20,9 +20,18 @@ async def get_blog_by_id(session:AsyncSession, id):
     print(record)
     return record
 
-async def get_blog(session: AsyncSession):
+async def get_all_blogs(session: AsyncSession):
     """WIll generate all posts"""
-    stmt = select(Post)
+    stmt = select(Post).order_by(Post.id.desc())
     result = await session.scalars(stmt)
     records = result.fetchall()
     return records
+
+async def fetch_latest_posts(session:AsyncSession):
+    """returns a list of posts
+    :param session: :class:`AsyncSession`
+    """
+    query = select(Post).order_by(Post.id.desc())
+    result = await session.scalars(query)
+    posts = result.fetchmany(15)
+    return posts

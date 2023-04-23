@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 // icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,7 +16,6 @@ import {
   faRedo,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { Combobox } from "@headlessui/react";
 // import css
 import styles from "../../../styles/editor/toolbar.module.css";
 
@@ -30,14 +29,17 @@ import {
   CAN_REDO_COMMAND,
   CAN_UNDO_COMMAND,
   COMMAND_PRIORITY_CRITICAL,
+  COMMAND_PRIORITY_EDITOR,
   FORMAT_TEXT_COMMAND,
   LexicalEditor,
   REDO_COMMAND,
   UNDO_COMMAND,
+  FORMAT_ELEMENT_COMMAND,
 } from "lexical";
-import { BlockStylesToolBar, FontStyles, blockTypeToBlockName } from "./formatText";
+import { BlockStylesToolBar, blockTypeToBlockName } from "./formatText";
 import { btnOnClick } from "./utils";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import dynamic from "next/dynamic";
 
 function clearEditor(editor: LexicalEditor) {
   editor.update(() => {
@@ -57,6 +59,12 @@ export default function ToolbarPlugin({ children }): JSX.Element {
   // editor is editable or not
   const [isEditable, setIsEditable] = useState(() => activeEditor.isEditable());
 
+  // current format of the text
+  const [isLeft, setIsLeft] = useState(true);
+  const [isCenter, setIsCenter] = useState(false);
+  const [isRight, setIsRight] = useState(false);
+  const [isJustify, setIsJustify] = useState(false);
+  const [format, setFormat] = useState("");
   //undo redo
   const [canUndo, setCanUndo] = useState(false);
   const [canRedo, setCanRedo] = useState(false);
@@ -68,6 +76,11 @@ export default function ToolbarPlugin({ children }): JSX.Element {
 
   // updating the toolbar
   const $updateToolbar = useCallback(() => {
+    const root = $getRoot();
+    if (root.hasFormat("left")) setFormat("left");
+    else if (root.hasFormat("center")) setFormat("center");
+    else if (root.hasFormat("right")) setFormat("right");
+    else if (root.hasFormat("justify")) setFormat("justify");
     const selection = $getSelection();
     if ($isRangeSelection(selection)) {
       // update text format
@@ -76,12 +89,11 @@ export default function ToolbarPlugin({ children }): JSX.Element {
       setIsUnderline(selection.hasFormat("underline"));
       setIsStrikethrough(selection.hasFormat("strikethrough"));
     }
-  }, [activeEditor]);
+  }, []);
   // block type
   const [blockType, setBlockType] =
     useState<keyof typeof blockTypeToBlockName>("paragraph");
 
-  // undo and redo changes
   useState(() => {
     return mergeRegister(
       editor.registerEditableListener((editable) => {
@@ -90,6 +102,7 @@ export default function ToolbarPlugin({ children }): JSX.Element {
       activeEditor.registerUpdateListener(({ editorState }) => {
         editorState.read(() => $updateToolbar());
       }),
+      // changes on undo
       activeEditor.registerCommand(
         CAN_UNDO_COMMAND,
         (payload) => {
@@ -98,6 +111,7 @@ export default function ToolbarPlugin({ children }): JSX.Element {
         },
         COMMAND_PRIORITY_CRITICAL
       ),
+      // changes on redo
       activeEditor.registerCommand(
         CAN_REDO_COMMAND,
         (payload) => {
@@ -105,6 +119,19 @@ export default function ToolbarPlugin({ children }): JSX.Element {
           return false;
         },
         COMMAND_PRIORITY_CRITICAL
+      ),
+      activeEditor.registerCommand(
+        FORMAT_ELEMENT_COMMAND,
+        (payload) => {
+          if (payload === "left") setIsLeft(true);
+          else if (payload === "center") setIsCenter(false);
+          else if (payload === "right") setIsRight(false);
+          else if (payload === "justify") setIsJustify(false);
+          setFormat(payload);
+          // $updateToolbar();
+          return false;
+        },
+        COMMAND_PRIORITY_EDITOR
       )
     );
   });
@@ -122,6 +149,7 @@ export default function ToolbarPlugin({ children }): JSX.Element {
           {/* styles applied to text */}
           <div className={styles.textStyles}>
             <button
+              type="button"
               className={`${styles.btn} ${isBold && "bg-zinc-400"}`}
               id="bold"
               onClick={(ev) => {
@@ -131,6 +159,7 @@ export default function ToolbarPlugin({ children }): JSX.Element {
               <FontAwesomeIcon icon={faBold} />
             </button>
             <button
+              type="button"
               className={`${styles.btn} ${isItalic && "bg-zinc-400"}`}
               onClick={(ev) => {
                 activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic");
@@ -140,6 +169,7 @@ export default function ToolbarPlugin({ children }): JSX.Element {
               <FontAwesomeIcon icon={faItalic} />
             </button>
             <button
+              type="button"
               className={`${styles.btn} ${isUnderline ? "bg-zinc-400" : null}`}
               onClick={(ev) => {
                 activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline");
@@ -148,6 +178,7 @@ export default function ToolbarPlugin({ children }): JSX.Element {
               <FontAwesomeIcon icon={faUnderline} />
             </button>
             <button
+              type="button"
               className={`${styles.btn} ${isStrikethrough && "bg-zinc-400"}`}
               onClick={(ev) => {
                 activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough");
@@ -158,16 +189,40 @@ export default function ToolbarPlugin({ children }): JSX.Element {
           </div>
           {/* aligning the text */}
           <div className={styles.formatStyles}>
-            <button className={styles.btn} onClick={btnOnClick}>
+            <button
+              type="button"
+              className={`${styles.btn} ${format === "left" && "!bg-zinc-400"}`}
+              onClick={() => {
+                activeEditor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "left");
+              }}
+            >
               <FontAwesomeIcon icon={faAlignLeft} />
             </button>
-            <button className={styles.btn} onClick={btnOnClick}>
+            <button
+              type="button"
+              className={`${styles.btn} ${format === "center" && "!bg-zinc-400"}`}
+              onClick={() => {
+                activeEditor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "center");
+              }}
+            >
               <FontAwesomeIcon icon={faAlignCenter} />
             </button>
-            <button className={styles.btn} onClick={btnOnClick}>
+            <button
+              type="button"
+              className={`${styles.btn} ${format === "right" && "!bg-zinc-400"}`}
+              onClick={() => {
+                activeEditor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "right");
+              }}
+            >
               <FontAwesomeIcon icon={faAlignRight} />
             </button>
-            <button className={styles.btn} onClick={btnOnClick}>
+            <button
+              type="button"
+              className={`${styles.btn} ${format === "justify" && "!bg-zinc-400"}`}
+              onClick={() => {
+                activeEditor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "justify");
+              }}
+            >
               <FontAwesomeIcon icon={faAlignJustify} />
             </button>
           </div>
@@ -179,9 +234,11 @@ export default function ToolbarPlugin({ children }): JSX.Element {
       <div className="ml-4 flex flex-row flex-wrap items-start gap-2 lg:mx-10">
         {/* clear editor */}
         <button
+          type="button"
           id="trash"
           name="trash"
           className="group rounded-md bg-zinc-50 shadow-md shadow-zinc-400 hover:bg-zinc-200 active:bg-zinc-400 active:shadow-zinc-300 disabled:pointer-events-none"
+          // onClick={(ev) => clearEditor(activeEditor)}
           onClick={(ev) => clearEditor(activeEditor)}
         >
           <FontAwesomeIcon
@@ -190,6 +247,7 @@ export default function ToolbarPlugin({ children }): JSX.Element {
           />
         </button>
         <button
+          type="button"
           disabled={!canUndo || !isEditable}
           // @ts-ignore
           onClick={() => activeEditor.dispatchCommand(UNDO_COMMAND)}

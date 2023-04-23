@@ -3,8 +3,9 @@
   @apply bg-zinc-100 p-4;
 }
 
+/* login page */
 .login {
-  @apply mx-11 rounded-md bg-zinc-100 py-6 px-6 shadow-lg shadow-sky-600;
+  @apply mx-10 flex w-[25rem] flex-col justify-center rounded-md bg-zinc-100 py-6 px-6 shadow-lg shadow-sky-600;
 }
 
 /* input outer box */

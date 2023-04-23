@@ -13,7 +13,7 @@ class User(Base):
     # contact = Column(INTEGER)
     email:Mapped[str] = mapped_column(Text)
     password_hash:Mapped[str] = mapped_column(Text)
-    posts = relationship('Post',back_populates='author')
+    posts = relationship('Post',back_populates='author', lazy="selectin")
     
     @property
     def password(self):

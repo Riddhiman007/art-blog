@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 //css
 import styles from "../../../styles/editor/toolbar.module.css";
@@ -142,11 +142,16 @@ export function BlockStylesToolBar({
             .includes(query.toLowerCase().replace(/\s+/g, ""))
         );
 
+  // ui design
+
   return (
-    <div className={styles.fontStyles}>
+    <div className={`${styles.fontStyles} grid`}>
       <Combobox value={selected} onChange={setSelected}>
         <div className="relative mt-1 mr-1 bg-zinc-100">
-          <div className="group relative flex cursor-default flex-row overflow-hidden rounded-lg bg-zinc-100 text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
+          <div
+            id="blockStyle"
+            className=" relative flex cursor-default flex-row overflow-hidden rounded-lg bg-zinc-100 text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm"
+          >
             <Combobox.Input
               className=" w-20 border-none bg-zinc-50 py-2 pl-3 text-sm leading-5 text-gray-900 focus:outline-transparent focus:ring-0 group-focus:outline-transparent"
               //@ts-ignore
@@ -171,7 +176,8 @@ export function BlockStylesToolBar({
           >
             <Combobox.Options
               as="div"
-              className="fixed z-50 mt-2 inline h-40 list-none overflow-auto rounded-md bg-zinc-50 bg-opacity-100 shadow-md shadow-zinc-300 sm:text-sm"
+              id="bOptions"
+              className=" z-50 mt-2 h-40 list-none overflow-auto rounded-md bg-zinc-50 bg-opacity-75 shadow-md shadow-zinc-300 sm:text-sm"
             >
               {filteredFont.length === 0 && query !== "" ? (
                 <div className="relative cursor-default select-none py-2 px-4 text-gray-700">

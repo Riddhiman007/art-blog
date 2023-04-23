@@ -378,6 +378,17 @@ a {
   @apply text-blue-500;
 }
 
+a:hover {
+  @apply text-blue-600 underline;
+}
+
+a:focus {
+  @apply text-blue-600 outline-dotted outline-2 outline-sky-700;
+}
+
+a:active {
+  @apply text-blue-800;
+}
 .list-inline-item {
   display: inline-block;
 }
@@ -403,11 +414,15 @@ a {
   @apply flex flex-row justify-end;
 }
 
-.submit button[type="submit"] {
+.submit button[type="submit"],
+.submit input[type="submit"] {
   @apply rounded-md bg-blue-600 px-4 py-2 text-blue-50 shadow shadow-blue-400;
 }
 .submit button[type="submit"]:hover,
 .submit button[type="submit"]:focus,
-.submit button[type="submit"]:active {
+.submit button[type="submit"]:active,
+.submit input[type="submit"]:active,
+.submit input[type="submit"]:focus,
+.submit input[type="submit"]:hover {
   @apply bg-blue-800 shadow-inner shadow-blue-900 outline-transparent;
 }

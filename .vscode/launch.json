@@ -5,14 +5,18 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "command": "yarn dev",
-      "name": "Frontend dev server",
+      "name": "Frontend Dev Server",
       "request": "launch",
-      "type": "node-terminal",
+      "runtimeArgs": ["run", "dev"],
+      "runtimeExecutable": "npm",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "node",
+      "console": "internalConsole",
       "cwd": "${workspaceFolder}/frontend"
     },
+
     {
-      "name": "Python: FastAPI",
+      "name": "Backend dev server",
       "type": "python",
       "request": "launch",
       "module": "uvicorn",

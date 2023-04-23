@@ -1,3 +1,7 @@
 .heading1 {
   @apply text-6xl;
 }
+
+.italic {
+  font-style: italic;
+}

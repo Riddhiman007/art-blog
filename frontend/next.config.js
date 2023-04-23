@@ -1,6 +1,4 @@
 /** @type {import('next').NextConfig} */
-const { styles } = require('@ckeditor/ckeditor5-dev-utils');
-
 
 
 module.exports = {
@@ -12,9 +10,6 @@ module.exports = {
       port: '',
       pathname: '/**'
     } ]
-  },
-  experimental: {
-    appDir: false
   }
 }
 //   webpack: (config, options) => {

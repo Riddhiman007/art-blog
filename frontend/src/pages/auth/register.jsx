@@ -6,9 +6,16 @@ import { FaLock, FaUser } from "react-icons/fa";
 import { MdOutlineLock, MdOutlineEmail, MdLock } from "react-icons/md";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
-// import fetch from "node-fetch";
+import dynamic from "next/dynamic";
+import Image from "next/image";
 
+const AvatarUpload = dynamic(() => import("../../components/Avatar/AvatarUpload"), {
+  ssr: false,
+});
 export default function Register() {
+  const [preview, setPreview] = useState("");
+  const [src, setSrc] = useState("");
+  console.log(src);
   const {
     register,
     handleSubmit,
@@ -40,14 +47,49 @@ export default function Register() {
     }
   };
   return (
-    <div className="flex h-fit !min-h-fit flex-col items-center gap-2 bg-gradient-to-br from-blue-700 via-purple-600  to-red-700 px-4 py-4 text-left">
+    <div className="flex h-fit !min-h-fit flex-col items-center gap-2 bg-gradient-to-br from-blue-700 via-purple-600  to-red-700 p-4 text-left">
       <header className="my-4 mx-2 flex flex-row text-center">
         <div>
           <h1 className="my-4 text-4xl text-neutral-50 sm:text-5xl">Register Yourself</h1>
         </div>
       </header>
-      <main className="container pt-6 pb-6 lg:aspect-video lg:!px-12">
+      <main className="container py-6 lg:aspect-video lg:!px-12">
         <div className="rounded-lg bg-zinc-100 py-4 shadow-lg shadow-zinc-600">
+          <div className="mx-4">
+            {/* <input
+              type="image"
+              name="image"
+              id="image"
+              onChange={(ev) => setSrc(ev.target.files[0])}
+            /> */}
+            <div>
+              <Image
+                className="my-4 ml-4"
+                loading="lazy"
+                alt="Your profile picture"
+                src={preview}
+                width={80}
+                height={80}
+                onChange={(ev) => console.log(ev.currentTarget.src)}
+              />
+            </div>
+            <div className="flex flex-row flex-wrap justify-center">
+              <AvatarUpload
+                src={src}
+                height={250}
+                width={250}
+                onCrop={(preview) => setPreview(preview)}
+                onClose={() => setPreview("")}
+                onBeforeFileLoad={(ev) => {
+                  if (ev.target.files[0].size > 90000) {
+                    alert("File size too big");
+                    ev.target.value = "";
+                  }
+                }}
+                onImageLoad={(data) => setSrc(data.src)}
+              />
+            </div>
+          </div>
           <form className={styles.register} onSubmit={handleSubmit(onSubmit)}>
             <div className="mx-4 flex flex-col">
               {/* Name */}

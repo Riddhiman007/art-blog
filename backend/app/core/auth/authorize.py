@@ -1,23 +1,24 @@
+from ...utils.dependency import get_session
+from ...utils.hash_pass import verify_password
+from ..exc.exceptions import InvalidCredentialsException
+from ..queries.user import get_user
+from ..schemas.user import Login
+from .jwt_handler import jwt, jwt_secret, algorithm, decodeJWT
 from fastapi import Depends, Request, HTTPException
 from fastapi.openapi.models import OAuthFlows as OAuthFlowsModel
 from fastapi.security import OAuth2, OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from fastapi.security.utils import get_authorization_scheme_param
+from fastapi_jwt_auth import AuthJWT
+from jose.exceptions import ExpiredSignatureError
 from sqlalchemy.ext.asyncio import AsyncSession
 from starlette.status import HTTP_401_UNAUTHORIZED
 from typing import Optional, Dict
+# oauth2_scheme = OAuth2PasswordBearer('/user/login')
 
-from .jwt_handler import jwt, jwt_secret, algorithm
-from ..exc.exceptions import InvalidCredentialsException
-from ...utils.dependency import get_session
-from ..schemas.user import Login
-from ..queries.user import get_user
-from ...utils.hash_pass import verify_password
-
-oauth2_scheme = OAuth2PasswordBearer('/user/login')
-
-async def get_current_user(token:str=Depends(oauth2_scheme), session:AsyncSession=Depends(get_session)):
-    payload = jwt.decode(token, jwt_secret, [algorithm]) # type:ignore
-    username = payload.get('sub')
+async def get_current_user(Authorize:AuthJWT=Depends(), session:AsyncSession=Depends(get_session)):#:token:str=Depends(oauth2_scheme), session:AsyncSession=Depends(get_session)):    
+    # payload = jwt.decode(token, jwt_secret, [algorithm]) # type:ignore
+    Authorize.jwt_required()
+    username = Authorize.get_jwt_subject()
     current_user = await get_user(session=session, username=username)
     return current_user
 

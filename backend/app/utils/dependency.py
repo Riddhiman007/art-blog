@@ -29,13 +29,13 @@ async def get_session():
         finally:
             await session.close()
 
-def slugify(txt:str):
-    for each_symbol in symbols:
-        if each_symbol in txt:
-            text = txt.replace(each_symbol, "")
-            text = text.lower()
-            text = text.replace(" ", "-")
-            return text
+def slugify(txt:str)->str:
+    txt = txt.lower()
+    txt = txt.replace(" ", "-")
+    for sym in symbols:
+        if sym in txt:
+            txt = txt.replace(sym, "")
+    return txt
 
 def verify_slug(slug:str)->str:
     slg = slug.replace("-", " ")

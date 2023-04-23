@@ -4,15 +4,19 @@ from fastapi.responses import HTMLResponse, ORJSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.routing import Mount
+
+# sqlalchemy imports
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 import os
 from markupsafe import Markup
 from typing import Optional
 # self imports
 from ..core.schemas.post import Posts, PostCreate
+from ..core.schemas.user import Users
 from ..core.models.users import User
 from ..core.models.posts import Post
-from ..core.queries.post import creates_new_blog
+from ..core.queries.post import creates_new_blog, fetch_latest_posts, get_all_blogs
 from ..utils.dependency import get_session, params
 from ..core.auth.authorize import get_current_user
 
@@ -21,7 +25,7 @@ templates = Jinja2Templates(directory="templates")
 
 
 @router.post("/create", response_model=Posts, response_class=ORJSONResponse)
-async def create_blog(user:User=Depends(get_current_user), post:PostCreate = Depends(PostCreate), session: AsyncSession = Depends(get_session)):
+async def create_blog(user:User=Depends(get_current_user), post:PostCreate = Depends(PostCreate.as_form), session: AsyncSession = Depends(get_session)):
    
         # with open(f'dynamic/{upload.filename}', 'xb') as f:
         #     f.write(content)
@@ -34,5 +38,18 @@ async def create_blog(user:User=Depends(get_current_user), post:PostCreate = Dep
 @router.get('/create')
 async def create_post_page(request:Request):
     return templates.TemplateResponse('create_post.html',{'request':request, 'params':params})
-        
-        
+
+@router.post("/latest", response_model=list[Posts])
+async def latest_posts(session:AsyncSession=Depends(get_session)):
+    """Will fetch latest posts. For now, it will fetch only 15 posts."""
+    query = select(Post).order_by(Post.id.desc())
+    result = await session.scalars(query)
+    posts = result.fetchmany(13)
+    return posts
+
+@router.post("/all", response_model=list[Posts])
+async def all_posts(session:AsyncSession=Depends(get_session)):
+    """Will fetch all posts"""
+    posts = await get_all_blogs(session)
+    # res:dict[str, list[dict[str, int|str|None|Users]]] = {"posts":posts}
+    return posts

@@ -3,11 +3,16 @@ import React, { useEffect } from "react";
 // import PropTypes from "prop-types";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
 import Image from "next/image";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { useSession } from "next-auth/react";
+
+// icons
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
+import { HiHome } from "react-icons/hi2";
+import { MdDashboard, MdLogin, MdLogout } from "react-icons/md";
+import { HiUserAdd } from "react-icons/hi";
 
 function Sidebar() {
   useEffect(() => {
@@ -41,7 +46,7 @@ function Sidebar() {
         }
       } else {
         // Scrolling Down
-        sidebar.classList.remove(["go-down"]);
+        sidebar.classList.remove("go-down");
         if (currentTop > headerHeight && !sidebar.classList.contains("go-up")) {
           sidebar.classList.add("go-up");
         }
@@ -60,10 +65,9 @@ function Sidebar() {
         >
           <FontAwesomeIcon icon={faBars} className="m-4 text-neutral-50" />
         </Disclosure.Button>
-
         {/* Sidebar panel */}
         <div
-          className="sidebar-trans go-up fixed top-0 left-0 z-50 !block h-full w-1/2 overflow-y-auto overflow-x-hidden bg-slate-100 ui-not-open:-translate-x-96 md:w-40 lg:w-72 lg:ui-not-open:translate-x-0 xxl:w-[20rem]"
+          className="sidebar-trans go-up fixed top-0 left-0 z-50 !block h-full w-1/2 overflow-y-auto overflow-x-hidden bg-[#deecf1f6] ui-not-open:-translate-x-96 md:w-40 lg:w-72 lg:ui-not-open:translate-x-0 xxl:w-[20rem]"
           id="sidebar"
         >
           <div key="user-info" className="container border-r-2">
@@ -82,18 +86,18 @@ function Sidebar() {
                       alt=""
                     />
                   </div>
-                  <div className="flex flex-row items-center">
+                  <div className="flex flex-row items-center justify-center">
                     <div className="flex flex-col items-start">
                       {/* Fullname */}
-                      <h3 className="mb-0 block text-center font-serif text-lg font-semibold text-stone-800 lg:text-center lg:text-xl">
+                      <h3 className="mb-0 block w-full text-center font-serif text-lg font-semibold text-stone-900 lg:text-center lg:text-xl">
                         {data.user.FullName}
                       </h3>
                       {/* Email */}
-                      <div className="my-2 block text-center font-sans text-base text-stone-700">
+                      <div className="my-2 block w-full text-center font-sans text-base text-stone-800">
                         {data.user.email}
                       </div>
                       {/* Username */}
-                      <p className="ml-1 block text-center text-base text-stone-500">
+                      <p className="block w-full text-center text-base text-zinc-700">
                         {data.user.username}
                       </p>
                     </div>
@@ -105,36 +109,30 @@ function Sidebar() {
             {/* nav items */}
             <hr
               key="hierchy"
-              className="my-4 overflow-y-auto overflow-x-hidden bg-slate-100"
+              className="mb-4 overflow-y-auto overflow-x-hidden !text-zinc-700"
             />
             <div key="nav-items" className="mt-8 h-full">
-              <div className="mx-4 flex flex-col flex-wrap items-stretch gap-1 !bg-slate-100 !p-0 [align-content:stretch]">
+              <div className="! mx-4 flex flex-col flex-wrap items-stretch gap-1 !p-0 [align-content:stretch]">
                 {/* Home */}
                 <Link
                   href="/"
-                  className="group mb-2 bg-slate-100 px-4 py-2 outline-transparent focus-within:rounded-lg focus-within:bg-neutral-900 hover:z-30 hover:rounded-lg hover:bg-neutral-900 hover:shadow-lg hover:shadow-neutral-700"
+                  className="group mb-2  px-4 py-2 outline-transparent focus-within:rounded-lg focus-within:bg-neutral-900 hover:z-30 hover:rounded-lg hover:bg-neutral-900 hover:shadow-lg hover:shadow-neutral-700"
                 >
-                  <div className="my-auto flex flex-row items-stretch gap-3 text-neutral-700 shadow-neutral-900 group-hover:bg-neutral-900 group-hover:text-neutral-50 group-focus:bg-neutral-900 group-focus:text-neutral-50">
-                    <FontAwesomeIcon
-                      icon={faFacebookF}
-                      className="self-center text-center group-hover:text-neutral-50 group-focus:text-neutral-50"
-                    />
+                  <div className="my-auto flex flex-row items-stretch gap-3 text-neutral-800 shadow-neutral-900 group-hover:bg-neutral-900 group-hover:text-neutral-50 group-focus:bg-neutral-900 group-focus:text-neutral-50">
+                    <HiHome className="h-5 w-5 self-center text-center group-hover:text-neutral-50 group-focus:text-neutral-50" />
                     <h5 className="ml-4 !mb-0 grow self-center text-center group-hover:text-neutral-50 group-focus:text-neutral-50">
                       Home
                     </h5>
                   </div>
                 </Link>
 
-                {/* Home */}
+                {/* Dashboard */}
                 <Link
                   href="/"
-                  className="group mb-2 bg-slate-100 px-4 py-2 outline-transparent focus-within:rounded-lg focus-within:bg-neutral-900 hover:z-30 hover:rounded-lg hover:bg-neutral-900 hover:shadow-lg hover:shadow-neutral-700"
+                  className="group mb-2  px-4 py-2 outline-transparent focus-within:rounded-lg focus-within:bg-neutral-900 hover:z-30 hover:rounded-lg hover:bg-neutral-900 hover:shadow-lg hover:shadow-neutral-700"
                 >
-                  <div className="my-auto flex flex-row items-stretch gap-3 text-neutral-700 shadow-neutral-900 group-hover:bg-neutral-900 group-hover:text-neutral-50 group-focus:bg-neutral-900 group-focus:text-neutral-50">
-                    <FontAwesomeIcon
-                      icon={faFacebookF}
-                      className="self-center text-center group-hover:text-neutral-50 group-focus:text-neutral-50"
-                    />
+                  <div className="my-auto flex flex-row items-stretch gap-3 text-neutral-800 shadow-neutral-900 group-hover:bg-neutral-900 group-hover:text-neutral-50 group-focus:bg-neutral-900 group-focus:text-neutral-50">
+                    <MdDashboard className="h-5 w-5 self-center text-center group-hover:text-neutral-50 group-focus:text-neutral-50" />
                     <h5 className="ml-4 !mb-0 grow self-center text-center group-hover:text-neutral-50 group-focus:text-neutral-50">
                       Dashboard
                     </h5>
@@ -142,15 +140,15 @@ function Sidebar() {
                 </Link>
 
                 {/* Divider */}
-                <hr className="my-4" />
+                <hr className="my-4 bg-zinc-800" />
 
                 {/* Post */}
                 <Menu>
                   <Menu.Button
                     as="div"
-                    className="group z-50 mb-2 bg-slate-100 px-4 py-2 outline-transparent focus-within:bg-neutral-900 hover:rounded-lg hover:bg-neutral-900 hover:shadow-xl hover:shadow-neutral-700 focus:rounded-lg"
+                    className="group z-50 mb-2  px-4 py-2 outline-transparent focus-within:bg-neutral-900 hover:rounded-lg hover:bg-neutral-900 hover:shadow-xl hover:shadow-neutral-700 focus:rounded-lg"
                   >
-                    <div className="my-auto flex flex-row items-stretch gap-3 text-neutral-700 shadow-neutral-900 group-hover:bg-neutral-900 group-hover:text-neutral-50 group-focus:bg-neutral-900 group-focus:text-neutral-50">
+                    <div className="my-auto flex flex-row items-stretch gap-3 text-neutral-800 shadow-neutral-900 group-hover:bg-neutral-900 group-hover:text-neutral-50 group-focus:bg-neutral-900 group-focus:text-neutral-50">
                       <FontAwesomeIcon
                         icon={faFacebookF}
                         className="self-center text-center group-hover:text-neutral-50 group-focus:text-neutral-50"
@@ -193,9 +191,9 @@ function Sidebar() {
                 {/* Create Post */}
                 <Link
                   href="/posts/create"
-                  className="group  mb-2 bg-slate-100 px-4 py-2 outline-transparent focus-within:rounded-lg focus-within:bg-neutral-900 hover:z-30 hover:rounded-lg hover:bg-neutral-900 hover:shadow-lg hover:shadow-neutral-700"
+                  className="group  mb-2  px-4 py-2 outline-transparent focus-within:rounded-lg focus-within:bg-neutral-900 hover:z-30 hover:rounded-lg hover:bg-neutral-900 hover:shadow-lg hover:shadow-neutral-700"
                 >
-                  <div className="my-auto flex flex-row items-stretch gap-3 text-neutral-700 shadow-neutral-900 group-hover:bg-neutral-900 group-hover:text-neutral-50 group-focus:bg-neutral-900 group-focus:text-neutral-50">
+                  <div className="my-auto flex flex-row items-stretch gap-3 text-neutral-800 shadow-neutral-900 group-hover:bg-neutral-900 group-hover:text-neutral-50 group-focus:bg-neutral-900 group-focus:text-neutral-50">
                     <FontAwesomeIcon
                       icon={faFacebookF}
                       className="self-center text-center group-hover:text-neutral-50 group-focus:text-neutral-50"
@@ -210,14 +208,11 @@ function Sidebar() {
 
                 {/* Login */}
                 <Link
-                  href="/"
-                  className="group  mb-2 bg-slate-100 px-4 py-2 outline-transparent focus-within:rounded-lg focus-within:bg-neutral-900 hover:z-30 hover:rounded-lg hover:bg-neutral-900 hover:shadow-lg hover:shadow-neutral-700"
+                  href="/auth/login"
+                  className="group  mb-2  px-4 py-2 outline-transparent focus-within:rounded-lg focus-within:bg-neutral-900 hover:z-30 hover:rounded-lg hover:bg-neutral-900 hover:shadow-lg hover:shadow-neutral-700"
                 >
-                  <div className="my-auto flex flex-row items-stretch gap-3 text-neutral-700 shadow-neutral-900 group-hover:bg-neutral-900 group-hover:text-neutral-50 group-focus:bg-neutral-900 group-focus:text-neutral-50">
-                    <FontAwesomeIcon
-                      icon={faFacebookF}
-                      className="self-center text-center group-hover:text-neutral-50 group-focus:text-neutral-50"
-                    />
+                  <div className="my-auto flex flex-row items-stretch gap-3 text-neutral-800 shadow-neutral-900 group-hover:bg-neutral-900 group-hover:text-neutral-50 group-focus:bg-neutral-900 group-focus:text-neutral-50">
+                    <MdLogin className="h-5 w-5 self-center text-center group-hover:text-neutral-50 group-focus:text-neutral-50" />
                     <h5 className="ml-4 !mb-0 grow self-center text-center group-hover:text-neutral-50 group-focus:text-neutral-50">
                       Login
                     </h5>
@@ -227,13 +222,10 @@ function Sidebar() {
                 {/* Register */}
                 <Link
                   href="/auth/register"
-                  className="group  mb-2 bg-slate-100 px-4 py-2 outline-transparent focus-within:rounded-lg focus-within:bg-neutral-900 hover:z-30 hover:rounded-lg hover:bg-neutral-900 hover:shadow-lg hover:shadow-neutral-700"
+                  className="group  mb-2  px-4 py-2 outline-transparent focus-within:rounded-lg focus-within:bg-neutral-900 hover:z-30 hover:rounded-lg hover:bg-neutral-900 hover:shadow-lg hover:shadow-neutral-700"
                 >
-                  <div className="my-auto flex flex-row items-stretch gap-3 text-neutral-700 shadow-neutral-900 group-hover:bg-neutral-900 group-hover:text-neutral-50 group-focus:bg-neutral-900 group-focus:text-neutral-50">
-                    <FontAwesomeIcon
-                      icon={faFacebookF}
-                      className="self-center text-center group-hover:text-neutral-50 group-focus:text-neutral-50"
-                    />
+                  <div className="my-auto flex flex-row items-stretch gap-3 text-neutral-800 shadow-neutral-900 group-hover:bg-neutral-900 group-hover:text-neutral-50 group-focus:bg-neutral-900 group-focus:text-neutral-50">
+                    <HiUserAdd className="h-5 w-5 self-center text-center group-hover:text-neutral-50 group-focus:text-neutral-50" />
                     <h5 className="ml-4 !mb-0 grow self-center text-center group-hover:text-neutral-50 group-focus:text-neutral-50">
                       Register
                     </h5>
@@ -245,13 +237,10 @@ function Sidebar() {
                 {/* Logout */}
                 <Link
                   href="/"
-                  className="group mt-4 mb-4 bg-slate-100 px-4 py-2 outline-transparent focus-within:rounded-lg focus-within:bg-neutral-900 hover:z-30 hover:rounded-lg hover:bg-neutral-900 hover:shadow-lg hover:shadow-neutral-700"
+                  className="group mt-4 mb-10 px-4 py-2 outline-transparent focus-within:rounded-lg focus-within:bg-neutral-900 hover:z-30 hover:rounded-lg hover:bg-neutral-900 hover:shadow-lg hover:shadow-neutral-700"
                 >
-                  <div className="my-auto flex flex-row items-stretch gap-3 text-neutral-700 shadow-neutral-900 group-hover:bg-neutral-900 group-hover:text-neutral-50 group-focus:bg-neutral-900 group-focus:text-neutral-50">
-                    <FontAwesomeIcon
-                      icon={faFacebookF}
-                      className="self-center text-center group-hover:text-neutral-50 group-focus:text-neutral-50"
-                    />
+                  <div className="my-auto flex flex-row items-stretch gap-3 text-neutral-800 shadow-neutral-900 group-hover:bg-neutral-900 group-hover:text-neutral-50 group-focus:bg-neutral-900 group-focus:text-neutral-50">
+                    <MdLogout className="h-5 w-5 self-center text-center group-hover:text-neutral-50 group-focus:text-neutral-50" />
                     <h5 className="ml-4 !mb-0 grow self-center text-center group-hover:text-neutral-50 group-focus:text-neutral-50">
                       Logout
                     </h5>
@@ -273,9 +262,9 @@ export default Sidebar;
                   <Menu.Button
                     as={Link}
                     href="/"
-                    className="group mb-2 mt-4 bg-slate-100 px-4 py-2 outline-transparent focus-within:rounded-lg focus-within:bg-neutral-900 hover:rounded-lg hover:bg-neutral-900 hover:shadow-xl hover:shadow-neutral-900"
+                    className="group mb-2 mt-4  px-4 py-2 outline-transparent focus-within:rounded-lg focus-within:bg-neutral-900 hover:rounded-lg hover:bg-neutral-900 hover:shadow-xl hover:shadow-neutral-900"
                   >
-                    <div className="my-auto flex flex-row items-stretch gap-3 text-neutral-700 shadow-neutral-900 group-hover:bg-neutral-900 group-hover:text-neutral-50 group-focus-visible:bg-neutral-900 group-focus-visible:text-neutral-50">
+                    <div className="my-auto flex flex-row items-stretch gap-3 text-neutral-800 shadow-neutral-900 group-hover:bg-neutral-900 group-hover:text-neutral-50 group-focus-visible:bg-neutral-900 group-focus-visible:text-neutral-50">
                       <FontAwesomeIcon
                         icon={faFacebookF}
                         className="self-center text-center group-hover:text-neutral-50 group-focus:text-neutral-50"

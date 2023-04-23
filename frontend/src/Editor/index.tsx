@@ -6,6 +6,7 @@ import {
   EditorConfig,
   EditorThemeClasses,
   LexicalEditor,
+  $setSelection,
 } from "lexical";
 import { HeadingNode } from "@lexical/rich-text";
 import { $generateHtmlFromNodes } from "@lexical/html";
@@ -90,7 +91,7 @@ export default function Editor({
       <div className="flex flex-col">
         <ToolbarPlugin>
           <hr className="mb-4 bg-slate-200" />
-          <div className="fl mt-4 px-4">
+          <div className=" mt-4 grid px-4">
             <RichTextPlugin
               placeholder={(isEditable) => {
                 return placeholder;

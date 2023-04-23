@@ -13,7 +13,7 @@ const theme: EditorThemeClasses = {
   },
   text: {
     bold: "text-semibold",
-    italic: "text-italic",
+    italic: styles.italic,
     underline: "underline",
     strikethrough: "stroke-slate-900 stroke-1",
   },
