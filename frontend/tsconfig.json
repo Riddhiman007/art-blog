@@ -27,7 +27,8 @@
     ".next/types/**/*.ts",
     "src/app/posts/create/page.jsx",
     "src/app/api/auth/[...nextauth]/route.js",
-    "src/pages/index.jsx"
+    "src/pages/index.jsx",
+    "src/pages/dashboard.jsx"
   ],
   "exclude": ["node_modules"]
 }

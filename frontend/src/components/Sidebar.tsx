@@ -12,48 +12,48 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
 import { HiHome } from "react-icons/hi2";
 import { MdDashboard, MdLogin, MdLogout } from "react-icons/md";
-import { HiUserAdd } from "react-icons/hi";
+import { HiUserAdd, HiUserCircle } from "react-icons/hi";
 
 function Sidebar() {
-  useEffect(() => {
-    const sidebar = document.getElementById("sidebar");
-    const mainNav = document.getElementById("mainNav");
-    window.addEventListener("scroll", () => {
-      if (mainNav.classList.contains("is-visible")) {
-        console.log(false);
-        sidebar.classList.add("go-down");
-      } else if (mainNav.classList.contains("is-fixed")) {
-        console.log(true);
-        sidebar.classList.remove("go-down");
-        sidebar.classList.add("go-up");
-      } else {
-        console.log("now");
-        sidebar.classList.add("go-down");
-      }
-    });
-    let scrollPos = 0;
-    const headerHeight = sidebar.clientHeight;
-    window.addEventListener("scroll", function () {
-      const currentTop = document.body.getBoundingClientRect().top * -1;
-      if (currentTop < scrollPos) {
-        // Scrolling Up
-        if (currentTop > 0 && sidebar.classList.contains("go-up")) {
-          sidebar.classList.add("go-down");
-        } else {
-          console.log(123);
-          sidebar.classList.remove("go-down", "go-up");
-          sidebar.classList.add("go-down");
-        }
-      } else {
-        // Scrolling Down
-        sidebar.classList.remove("go-down");
-        if (currentTop > headerHeight && !sidebar.classList.contains("go-up")) {
-          sidebar.classList.add("go-up");
-        }
-      }
-      scrollPos = currentTop;
-    });
-  });
+  // useEffect(() => {
+  //   const sidebar = document.getElementById("sidebar");
+  //   const mainNav = document.getElementById("mainNav");
+  //   window.addEventListener("scroll", () => {
+  //     if (mainNav.classList.contains("is-visible")) {
+  //       console.log(false);
+  //       sidebar.classList.add("go-down");
+  //     } else if (mainNav.classList.contains("is-fixed")) {
+  //       console.log(true);
+  //       sidebar.classList.remove("go-down");
+  //       sidebar.classList.add("go-up");
+  //     } else {
+  //       console.log("now");
+  //       sidebar.classList.add("go-down");
+  //     }
+  //   });
+  //   let scrollPos = 0;
+  //   const headerHeight = sidebar.clientHeight;
+  //   window.addEventListener("scroll", function () {
+  //     const currentTop = document.body.getBoundingClientRect().top * -1;
+  //     if (currentTop < scrollPos) {
+  //       // Scrolling Up
+  //       if (currentTop > 0 && sidebar.classList.contains("go-up")) {
+  //         sidebar.classList.add("go-down");
+  //       } else {
+  //         console.log(123);
+  //         sidebar.classList.remove("go-down", "go-up");
+  //         sidebar.classList.add("go-down");
+  //       }
+  //     } else {
+  //       // Scrolling Down
+  //       sidebar.classList.remove("go-down");
+  //       if (currentTop > headerHeight && !sidebar.classList.contains("go-up")) {
+  //         sidebar.classList.add("go-up");
+  //       }
+  //     }
+  //     scrollPos = currentTop;
+  //   });
+  // });
   const { data } = useSession();
   return (
     <>
@@ -67,7 +67,7 @@ function Sidebar() {
         </Disclosure.Button>
         {/* Sidebar panel */}
         <div
-          className="sidebar-trans go-up fixed top-0 left-0 z-50 !block h-full w-1/2 overflow-y-auto overflow-x-hidden bg-[#deecf1f6] ui-not-open:-translate-x-96 md:w-40 lg:w-72 lg:ui-not-open:translate-x-0 xxl:w-[20rem]"
+          className="sidebar-trans go-up fixed top-0 left-0 z-50 !block h-full w-1/2 overflow-y-auto overflow-x-hidden bg-purple-700 ui-not-open:-translate-x-96 md:w-40 lg:w-72 lg:ui-not-open:translate-x-0 xxl:w-[20rem]"
           id="sidebar"
         >
           <div key="user-info" className="container border-r-2">
@@ -120,6 +120,19 @@ function Sidebar() {
                 >
                   <div className="my-auto flex flex-row items-stretch gap-3 text-neutral-800 shadow-neutral-900 group-hover:bg-neutral-900 group-hover:text-neutral-50 group-focus:bg-neutral-900 group-focus:text-neutral-50">
                     <HiHome className="h-5 w-5 self-center text-center group-hover:text-neutral-50 group-focus:text-neutral-50" />
+                    <h5 className="ml-4 !mb-0 grow self-center text-center group-hover:text-neutral-50 group-focus:text-neutral-50">
+                      Home
+                    </h5>
+                  </div>
+                </Link>
+
+                {/* Profile */}
+                <Link
+                  href="/profile"
+                  className="group mb-2  px-4 py-2 outline-transparent focus-within:rounded-lg focus-within:bg-neutral-900 hover:z-30 hover:rounded-lg hover:bg-neutral-900 hover:shadow-lg hover:shadow-neutral-700"
+                >
+                  <div className="my-auto flex flex-row items-stretch gap-3 text-neutral-800 shadow-neutral-900 group-hover:bg-neutral-900 group-hover:text-neutral-50 group-focus:bg-neutral-900 group-focus:text-neutral-50">
+                    <HiUserCircle className="h-5 w-5 self-center text-center group-hover:text-neutral-50 group-focus:text-neutral-50" />
                     <h5 className="ml-4 !mb-0 grow self-center text-center group-hover:text-neutral-50 group-focus:text-neutral-50">
                       Home
                     </h5>
