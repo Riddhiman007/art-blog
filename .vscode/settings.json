@@ -1,0 +1,23 @@
+{
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "python.formatting.provider": "none",
+  "[css]": {
+    "editor.suggest.insertMode": "replace",
+    "editor.defaultFormatter": "bradlc.vscode-tailwindcss"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnType": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "tailwindCSS.suggestions": true,
+  "tailwindCSS.hovers": true,
+  "tailwindCSS.colorDecorators": true,
+  "tailwindCSS.classAttributes": ["class", "className", "ngClass", "tw"],
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.lint.cssConflict": "warning",
+  "tailwindCSS.validate": true,
+  "css.validate": false,
+  "python.analysis.typeCheckingMode": "basic"
+}

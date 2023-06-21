@@ -1,0 +1,38 @@
+/* default styles for group of buttons */
+.defaultStyles {
+  @apply flex flex-row gap-1 pr-1;
+}
+
+/* styles to text styles toolbar */
+.textStyles {
+  @apply defaultStyles ml-1 !gap-0;
+}
+
+/* styles applied to font name select button and font size select button */
+.fontStyles {
+  @apply defaultStyles;
+}
+
+.fontStyles .fontNameSelect {
+  @apply rounded-sm px-1 focus:outline-transparent active:bg-zinc-400;
+}
+/* styles applied to format buttons  */
+.formatStyles {
+  @apply defaultStyles ml-1;
+}
+
+/* buttons */
+.btn {
+  @apply rounded-md px-2 py-[0.15rem] hover:bg-zinc-300 active:bg-neutral-600;
+}
+
+.btn:active {
+  animation-name: go-in;
+}
+
+/* icons */
+.btn i {
+  @apply mx-auto;
+}
+
+/* select styles */
