@@ -23,25 +23,27 @@ import {
   Typography,
 } from "../../components";
 
+// form control
+import { Controller, FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
+
+interface IFormInputs {
+  email: string;
+}
 export default function Login() {
   // whether the modal is shown
-  const [showModal, setShowModal] = useState(false);
 
-  const [showPass, setShowPass] = useState(false);
-  const [email, setEmail] = useState("");
-
+  // form components
+  const { control, handleSubmit } = useForm();
   /**
    *
    * @param ev The main Form element
    * It will trigger when the user has clicked the submit button
    *
    */
-  const handleSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
-    ev.preventDefault;
-    setShowModal(true);
+  const submitLogin: SubmitHandler<FieldValues> = async (data) => {
     console.log("submit clicked");
-    const logged = signIn("email", { email: email });
+    const logged = signIn("email", { email: data.email });
     logged.then(() => console.log("logged in successfully"));
   };
   // set the value of otp
@@ -55,26 +57,43 @@ export default function Login() {
       </Box>
       <FormControl
         component="form"
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(submitLogin)}
         className="m-7 mt-0 flex flex-col gap-4"
       >
-        <TextField
-          label="Email"
-          type="text"
+        <Controller
           name="email"
-          onChange={(ev) => setEmail(ev.currentTarget.value)}
-          required
-          placeholder="Please enter your email address"
-          variant="standard"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <Icon>
-                  <MdEmail />
-                </Icon>
-              </InputAdornment>
-            ),
-          }}
+          control={control}
+          rules={{ required: true }}
+          render={({ fieldState:{error} }) => (
+            <TextField
+              label="Email"
+              type="email"
+              placeholder="Please enter your email address"
+              variant="standard"
+              FormHelperTextProps={{ error: true }}
+              helperText={
+                <>
+                  {error && (
+                    <Typography
+                      variant="body2"
+                      className="text-red-600 dark:text-red-400"
+                    >
+                      {error?.type==="required" && "Please enter your email address"}
+                    </Typography>
+                  )}
+                </>
+              }
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Icon>
+                      <MdEmail />
+                    </Icon>
+                  </InputAdornment>
+                ),
+              }}
+            />
+          )}
         />
 
         {/* submit */}
@@ -88,10 +107,10 @@ export default function Login() {
           <Button
             type="submit"
             variant="contained"
-            className="hover:text-green-400focus:text-green-400 bg-green-800 text-green-50 shadow-xl shadow-slate-500 hover:bg-green-950"
+            className="bg-green-800 text-green-50 shadow shadow-slate-700 hover:bg-green-950 hover:text-green-400 focus:text-green-400 dark:shadow-green-950"
             sx={{ gridColumn: 2, gridRow: "2" }}
           >
-            Sign up
+            Log in
           </Button>
         </Box>
       </FormControl>

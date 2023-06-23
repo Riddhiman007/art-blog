@@ -20,6 +20,7 @@ import {
 import { MuiOtpInput } from "mui-one-time-password-input";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
+import { Controller, FieldValues, SubmitHandler, useForm } from "react-hook-form";
 // import { createUser } from "../../db/user"; // registration function
 
 /**
@@ -27,20 +28,17 @@ import { signIn } from "next-auth/react";
  * This function will create a new user
  */
 export default async function Register() {
-  const firstName = useRef<string>();
-  const middleName = useRef<string | null>();
-  const lastName = useRef<string>();
-  const email = useRef<string>();
+  // form hook
+  const { control, handleSubmit } = useForm();
 
-  const handleSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
-    ev.preventDefault();
+  const submitRegistration: SubmitHandler<FieldValues> = async (user) => {
     const res = await fetch("/user/create", {
       method: "POST",
       body: JSON.stringify({
-        firstname: firstName.current,
-        middlename: middleName.current,
-        lastname: lastName.current,
-        email: email.current,
+        firstname: user.firstname,
+        middlename: user.middlename,
+        lastname: user.lastname,
+        email: user.lastname,
       }),
     });
     const data = await res.json();
@@ -56,39 +54,36 @@ export default async function Register() {
       </Box>
       <FormControl
         component="form"
-        onSubmit={handleSubmit}
-        method="post"
+        onSubmit={handleSubmit(submitRegistration)}
         className="m-7 mt-0 flex flex-col gap-4"
       >
         <Box className="flex flex-row gap-4">
-          <TextField
-            label="First Name"
-            required
-            id="firstname"
+          <Controller
+            control={control}
+            rules={{ required: true }}
             name="firstname"
-            onChange={(ev) => (firstName.current = ev.target.value)}
+            render={({ fieldState: { error } }) => (
+              <TextField
+                helperText={
+                  error && (
+                    <Typography variant="body2">
+                      {error.type === "required" && "Please enter your first name"}
+                    </Typography>
+                  )
+                }
+              />
+            )}
           />
-          <TextField
-            label="Middle Name"
-            id="middlename"
-            name="middlename"
-            onChange={(ev) => (middleName.current = ev.target.value)}
+
+          <Controller name="middlename"
+            render={() => (
+              <TextField label="Middle Name" id="middlename"  />
+            )}
           />
-          <TextField
-            label="Last Name"
-            id="lastname"
-            required
-            name="lastname"
-            onChange={(ev) => (lastName.current = ev.target.value)}
-          />
+
+          <TextField label="Last Name" id="lastname" required name="lastname" />
         </Box>
-        <TextField
-          label="Email"
-          type="email"
-          required
-          name="email"
-          onChange={(ev) => (email.current = ev.target.value)}
-        />
+        <TextField label="Email" type="email" required name="email" />
 
         {/* submit */}
         <Box className="flex flex-row justify-between">
