@@ -1,9 +1,7 @@
-"use client";
 import "./globals.css";
 import { Metadata } from "next";
 
 import { Footer, Navbar } from "./components";
-import { useContext } from "react";
 import Providers from "./context";
 
 export const metadata: Metadata = {
