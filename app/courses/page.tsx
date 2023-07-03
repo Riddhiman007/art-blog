@@ -9,9 +9,12 @@ import {
   CardHeader,
   Container,
   CssBaseline,
+  Joy,
   Typography,
 } from "../components";
 
+import anatomy from "@@/static/img/anatomy.jpg";
+import Image from "next/image";
 /**
  * An interface of the common elemnts of a course
  */
@@ -49,6 +52,7 @@ export default function Courses() {
         {courses.map((course) => (
           <>
             <Card className={`${course.background} w-fit items-center`}>
+              {/* <Image className="static" fill src={anatomy} alt="anatomy" /> */}
               <CardActionArea className="h-full px-4 py-7">
                 <CardContent className="flex flex-col gap-7">
                   <Typography

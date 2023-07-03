@@ -11,7 +11,19 @@ import { log } from "console";
 export default async function Home() {
   return (
     <>
-      <Header image={Ganesh}>Kalaspandan Art Gallery</Header>
+      <Header image={Ganesh}>
+        <Box className="flex w-full flex-col gap-4">
+          <Typography
+            variant="h3"
+            className=" text-center text-slate-950 text-opacity-100 dark:text-slate-100"
+          >
+            Kalaspandan Art Gallery
+          </Typography>
+          <Typography variant="h5" className="text-center opacity-90 ">
+            Dream website for artists
+          </Typography>
+        </Box>
+      </Header>
       <Container className="mb-12">
         <Box className="mx-auto grid grid-cols-2 justify-center gap-7 !px-10 lg:!px-12 xl:grid-cols-4">
           {/* Blog posts */}

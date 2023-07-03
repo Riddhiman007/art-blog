@@ -15,7 +15,6 @@ const authOptions: NextAuthOptions = {
     signIn: "/auth/login",
     verifyRequest: "/auth/verify",
   },
-
   providers: [
     // Email otp provider
     EmailProvider({

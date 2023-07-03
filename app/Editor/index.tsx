@@ -85,21 +85,23 @@ export default function Editor({
     >
       <div className="flex flex-col">
         <ToolbarPlugin>
-          <hr className="mb-4 bg-slate-200" />
-          <div className=" mt-4 grid px-4">
-            <RichTextPlugin
-              placeholder={(isEditable) => {
-                return placeholder;
-              }}
-              contentEditable={
-                <ContentEditable
-                  as="div"
-                  className="inline-block h-full max-h-full min-h-[150px] w-full focus:outline-none"
-                />
-              }
-              ErrorBoundary={LexicalErrorBoundary}
-            />
-          </div>
+          <>
+            <hr className="mb-4 bg-slate-200" />
+            <div className=" mt-4 grid px-4">
+              <RichTextPlugin
+                placeholder={(isEditable) => {
+                  return placeholder;
+                }}
+                contentEditable={
+                  <ContentEditable
+                    as="div"
+                    className="inline-block h-full max-h-full min-h-[150px] w-full focus:outline-none"
+                  />
+                }
+                ErrorBoundary={LexicalErrorBoundary}
+              />
+            </div>
+          </>
         </ToolbarPlugin>
         <OnChangePlugin onChange={onChange} />
         {/* <ActionPlugin /> */}

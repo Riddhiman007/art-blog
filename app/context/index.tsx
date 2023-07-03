@@ -6,13 +6,12 @@ import { DarkModeProvider } from "./DarkModeContext";
 
 export default function Providers({ children }: { children: JSX.Element }): JSX.Element {
   return (
-    <DarkModeProvider>
-      <MuiTheme>
+    <MuiTheme>
+      <DarkModeProvider>
         <AuthProvider>{children}</AuthProvider>
-      </MuiTheme>
-    </DarkModeProvider>
-    
+      </DarkModeProvider>
+    </MuiTheme>
   );
 }
 
-export { DarkModeContext } from './DarkModeContext';
+export { DarkModeContext } from "./DarkModeContext";

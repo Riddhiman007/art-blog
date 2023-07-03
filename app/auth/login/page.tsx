@@ -43,7 +43,12 @@ export default function Login() {
    */
   const submitLogin: SubmitHandler<FieldValues> = async (data) => {
     console.log("submit clicked");
-    const logged = signIn("email", { email: data.email });
+    const res = await fetch("/auth/loginHandler", {
+      method: "POST",
+      body: JSON.stringify({ email: data.email }),
+    });
+    const info = await res.json();
+    const logged = signIn("email", { email: info.email });
     logged.then(() => console.log("logged in successfully"));
   };
   // set the value of otp
@@ -64,11 +69,11 @@ export default function Login() {
           name="email"
           control={control}
           rules={{ required: true }}
-          render={({ fieldState:{error} }) => (
+          render={({ field, fieldState: { error } }) => (
             <TextField
-              label="Email"
-              type="email"
-              placeholder="Please enter your email address"
+              {...field}
+              label="Email or username"
+              placeholder="Please enter your email address or username"
               variant="standard"
               FormHelperTextProps={{ error: true }}
               helperText={
@@ -78,7 +83,8 @@ export default function Login() {
                       variant="body2"
                       className="text-red-600 dark:text-red-400"
                     >
-                      {error?.type==="required" && "Please enter your email address"}
+                      {error?.type === "required" &&
+                        "Either enter your email address or username"}
                     </Typography>
                   )}
                 </>

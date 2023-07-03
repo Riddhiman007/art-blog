@@ -1,15 +1,13 @@
 name: Build the website
 on: [push, merge_group]
-jobs: 
-    build-project:
-        name: Build project
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v3
-            - 
-              name: Install NPM dependencies
-              run: npm i
-            - name: Build project and export it
-              run: npm run export
-              
+jobs:
+  build-project:
+    name: Build project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install NPM dependencies
+        run: npm i
+      - name: Build project and export it
+        run: npm run build

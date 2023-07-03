@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, MouseEvent } from "react";
+import React from "react";
 
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 // components
@@ -16,12 +16,9 @@ import {
   Modal,
 } from "../../components";
 
-// otp input
-import { MuiOtpInput } from "mui-one-time-password-input";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { Controller, FieldValues, SubmitHandler, useForm } from "react-hook-form";
-// import { createUser } from "../../db/user"; // registration function
 
 /**
  *
@@ -32,13 +29,16 @@ export default async function Register() {
   const { control, handleSubmit } = useForm();
 
   const submitRegistration: SubmitHandler<FieldValues> = async (user) => {
+    console.log(user);
+
     const res = await fetch("/user/create", {
       method: "POST",
       body: JSON.stringify({
         firstname: user.firstname,
         middlename: user.middlename,
         lastname: user.lastname,
-        email: user.lastname,
+        email: user.email,
+        username: user.username,
       }),
     });
     const data = await res.json();
@@ -62,8 +62,12 @@ export default async function Register() {
             control={control}
             rules={{ required: true }}
             name="firstname"
-            render={({ fieldState: { error } }) => (
+            render={({ field, fieldState: { error } }) => (
               <TextField
+                {...field}
+                label="First Name"
+                id="firstname"
+                FormHelperTextProps={{ error: true }}
                 helperText={
                   error && (
                     <Typography variant="body2">
@@ -75,15 +79,84 @@ export default async function Register() {
             )}
           />
 
-          <Controller name="middlename"
-            render={() => (
-              <TextField label="Middle Name" id="middlename"  />
+          <Controller
+            name="middlename"
+            control={control}
+            render={({ field, fieldState: { error } }) => (
+              <TextField
+                {...field}
+                label="Middle Name"
+                id="middlename"
+                helperText={
+                  error && <Typography variant="body2">{error.message}</Typography>
+                }
+              />
             )}
           />
-
-          <TextField label="Last Name" id="lastname" required name="lastname" />
+          <Controller
+            name="lastname"
+            control={control}
+            rules={{ required: true }}
+            render={({ field, fieldState: { error } }) => (
+              <TextField
+                {...field}
+                label="Last Name"
+                id="lastname"
+                FormHelperTextProps={{ error: true }}
+                helperText={
+                  error && (
+                    <Typography variant="body2">
+                      {error.type === "required" && "Please enter your last name"}
+                    </Typography>
+                  )
+                }
+              />
+            )}
+          />
         </Box>
-        <TextField label="Email" type="email" required name="email" />
+
+        <Controller
+          name="username"
+          control={control}
+          rules={{ required: true }}
+          render={({ field, fieldState: { error } }) => (
+            <TextField
+              {...field}
+              label="Username"
+              id="Username"
+              FormHelperTextProps={{ error: true }}
+              helperText={
+                error && (
+                  <Typography variant="body2">
+                    {error.type === "required" && "Please enter your username"}
+                  </Typography>
+                )
+              }
+            />
+          )}
+        />
+
+        <Controller
+          name="email"
+          control={control}
+          rules={{ required: true }}
+          render={({ field, fieldState: { error } }) => (
+            <TextField
+              {...field}
+              label="Email"
+              id="email"
+              type="email"
+              FormHelperTextProps={{ error: true }}
+              helperText={
+                error && (
+                  <Typography variant="body2">
+                    {error.type === "required" && "Please enter your email"}
+                  </Typography>
+                )
+              }
+            />
+          )}
+        />
 
         {/* submit */}
         <Box className="flex flex-row justify-between">

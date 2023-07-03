@@ -1,10 +1,20 @@
 "use client";
-import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
+import {
+  ThemeProvider,
+  createTheme,
+  CssBaseline,
+  Experimental_CssVarsProvider,
+  experimental_extendTheme,
+  THEME_ID,
+  useColorScheme,
+} from "@mui/material";
+import { CssVarsProvider } from "@mui/joy";
 import { useTheme } from "next-themes";
 
 import React, { useContext, useEffect, useState } from "react";
 import { DarkModeContext } from "./DarkModeContext";
 
+const material_theme = experimental_extendTheme();
 export default function Theme({ children }) {
   const [root, setRoot] = useState("");
 
@@ -25,13 +35,21 @@ export default function Theme({ children }) {
       MuiDrawer: { defaultProps: { container: root } },
     },
     palette: {
-      mode: isDark ? "dark" : "light",
+      mode: "light",
     },
   });
+
   return (
     <ThemeProvider theme={MuiTheme}>
-      <CssBaseline />
-      {children}
+      <Experimental_CssVarsProvider
+        theme={{ [THEME_ID]: material_theme }}
+        defaultMode="system"
+      >
+        <CssVarsProvider defaultMode={isDark ? "dark" : "light"}>
+          <CssBaseline enableColorScheme />
+          {children}
+        </CssVarsProvider>
+      </Experimental_CssVarsProvider>
     </ThemeProvider>
   );
 }
