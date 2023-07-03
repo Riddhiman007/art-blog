@@ -1,0 +1,11 @@
+{
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/page": "app/page.js",
+  "/courses/page": "app/courses/page.js",
+  "/gallery/page": "app/gallery/page.js",
+  "/courses/create/page": "app/courses/create/page.js",
+  "/user/create/route": "app/user/create/route.js",
+  "/auth/login/page": "app/auth/login/page.js",
+  "/auth/register/page": "app/auth/register/page.js",
+  "/auth/verify/page": "app/auth/verify/page.js"
+}
