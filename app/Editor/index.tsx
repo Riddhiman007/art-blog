@@ -25,6 +25,10 @@ import theme from "./theme";
 //toolbar
 import ToolbarPlugin from "./plugins/ToolbarPlugin";
 import ActionPlugin from "./plugins/ActionPlugin";
+import ImageNode from "./nodes/ImageNode";
+import YoutubeNode from "./nodes/YoutubeNode";
+import YoutubePlugin from "./plugins/YoutubePlugin";
+import { Box } from "@@/components";
 
 // When the editor changes, you can get notified via the
 // LexicalOnChangePlugin!
@@ -39,8 +43,8 @@ function onChange(editorState: EditorState) {
 /**
  * A function which converts lexical nodes into html
  */
-function HTMLPlugin(editor: LexicalEditor) {
-  return $generateHtmlFromNodes(editor);
+function HTMLPlugin(editorState: EditorState, editor: LexicalEditor) {
+  return editorState.read(() => $generateHtmlFromNodes(editor));
 }
 // Lexical React plugins are React components, which makes them
 // highly composable. Furthermore, you can lazy load plugins if
@@ -80,12 +84,13 @@ export default function Editor({
         namespace: "editor",
         theme: theme,
         onError: onError,
-        nodes: [HeadingNode],
+        nodes: [HeadingNode, ImageNode, YoutubeNode],
       }}
     >
-      <div className="flex flex-col">
-        <ToolbarPlugin>
-          <>
+      <div className="flex h-full max-h-fit w-full flex-col">
+        <Box className="my-4 h-fit rounded-md bg-zinc-50 shadow-md shadow-gray-500 focus-within:outline-transparent dark:bg-slate-800 dark:shadow-slate-900 lg:mx-10">
+          <ToolbarPlugin />
+          <Box>
             <hr className="mb-4 bg-slate-200" />
             <div className=" mt-4 grid px-4">
               <RichTextPlugin
@@ -95,18 +100,20 @@ export default function Editor({
                 contentEditable={
                   <ContentEditable
                     as="div"
-                    className="inline-block h-full max-h-full min-h-[150px] w-full focus:outline-none"
+                    className="mb-7 inline-block h-full max-h-fit min-h-[150px] w-full focus:outline-none dark:bg-slate-800"
                   />
                 }
                 ErrorBoundary={LexicalErrorBoundary}
               />
             </div>
-          </>
-        </ToolbarPlugin>
+          </Box>
+        </Box>
+        <ActionPlugin />
         <OnChangePlugin onChange={onChange} />
         {/* <ActionPlugin /> */}
       </div>
       <HistoryPlugin />
+      <YoutubePlugin />
       <MyCustomAutoFocusPlugin />
     </LexicalComposer>
   );

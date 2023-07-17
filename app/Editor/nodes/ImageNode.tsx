@@ -15,32 +15,32 @@ export interface ImageProps {
   alt?: string;
   maxWidth: number;
 }
-export class ImageNode extends DecoratorNode<JSX.Element> {
+export default class ImageNode extends DecoratorNode<JSX.Element> {
   __src: string;
   __width: number; // | "inherit";
   __height: number; //| "inherit";
   __maxWidth?: number;
-  __alt?: string;
+  __alt?: string | undefined;
 
-  getType(): string {
+  static getType(): string {
     return "images";
   }
   static clone(node: ImageNode): LexicalNode {
     return new ImageNode(
       node.__src,
-      node.__alt,
       node.__width,
       node.__height,
       node.__maxWidth,
-      node.__alt
+      node.__alt,
+      node.__key
     );
   }
   constructor(
     src: string,
-    alt: string,
     width: number,
     height: number,
-    maxWidth: number,
+    maxWidth?: number,
+    alt?: string,
     key?: string
   ) {
     super(key);

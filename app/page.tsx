@@ -1,14 +1,16 @@
-import React from "react";
+"use client";
+import React, { useContext, useEffect } from "react";
 import Link from "next/link";
-import { useSession, signIn } from "next-auth/react";
 import Ganesh from "./static/img/ganesh_edited.jpg";
 
 // mui conponents
 import { Box, Button, Container, Typography, Header } from "./components";
 import { getServerSession } from "next-auth";
-import { log } from "console";
+import { MobileFirstContext } from "./context";
 
 export default async function Home() {
+  const isMobile = useContext(MobileFirstContext);
+  useEffect(() => console.log(isMobile), [isMobile]);
   return (
     <>
       <Header image={Ganesh}>

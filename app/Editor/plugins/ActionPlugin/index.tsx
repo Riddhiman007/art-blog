@@ -24,6 +24,8 @@ import {
 } from "lexical";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 
+// components
+import { IconButton, ButtonGroup } from "@@/components";
 function clearEditor(editor: LexicalEditor) {
   editor.update(() => {
     const root = $getRoot();
@@ -37,84 +39,81 @@ function clearEditor(editor: LexicalEditor) {
  */
 export default function ActionPlugin() {
   const [editor] = useLexicalComposerContext(); //editor
-  const [activeEditor, setActiveEditor] = useState(editor); //active editor
 
-  // undo and redo state changes
   const [canUndo, setCanUndo] = useState(false);
   const [canRedo, setCanRedo] = useState(false);
-
-  // editor can be editable
   const [isEditable, setIsEditable] = useState(() => editor.isEditable());
 
-  // useEffect(() => {
-  //   const redo = document.getElementById("redo");
-  //   redo.setAttribute("disabled", "true");
-  //   const undo = document.getElementById("undo");
-  //   undo.addEventListener("click", () => redo.removeAttribute("disabled"));
-  // });
-
-  // configure undo and redo
-  useEffect(() => {
-    // undo
-    return mergeRegister(
-      activeEditor.registerCommand(
-        CAN_UNDO_COMMAND,
-        (payload) => {
-          setCanUndo(payload);
-          return false;
-        },
-        COMMAND_PRIORITY_CRITICAL
+  useEffect(
+    () =>
+      mergeRegister(
+        // changes on undo
+        editor.registerCommand(
+          CAN_UNDO_COMMAND,
+          (payload) => {
+            setCanUndo(payload);
+            return false;
+          },
+          COMMAND_PRIORITY_CRITICAL
+        ),
+        // changes on redo
+        editor.registerCommand(
+          CAN_REDO_COMMAND,
+          (payload) => {
+            setCanRedo(payload);
+            return false;
+          },
+          COMMAND_PRIORITY_CRITICAL
+        )
       ),
-      activeEditor.registerCommand(
-        CAN_REDO_COMMAND,
-        (payload) => {
-          setCanRedo(payload);
-          return false;
-        },
-        COMMAND_PRIORITY_CRITICAL
-      )
-    );
-  });
+    [editor]
+  );
   return (
-    <div className="ml-4 flex flex-row flex-wrap items-start gap-2 lg:mx-10">
+    <ButtonGroup className=" flex flex-row flex-wrap items-start gap-2 lg:mx-10">
       {/* clear editor */}
-      <button
+      <IconButton
+        size="small"
+        type="button"
         id="trash"
         name="trash"
-        className="group rounded-md bg-zinc-50 shadow-md shadow-zinc-400 hover:bg-zinc-200 active:bg-zinc-400 active:shadow-zinc-300 disabled:pointer-events-none"
-        onClick={(ev) => clearEditor(activeEditor)}
+        className="group rounded-md bg-zinc-50 shadow-md shadow-zinc-400 hover:bg-zinc-200 active:bg-zinc-400 active:shadow-zinc-300 disabled:pointer-events-none dark:bg-slate-800 dark:shadow-slate-950"
+        // onClick={(ev) => clearEditor(activeEditor)}
+        onClick={(ev) => clearEditor(editor)}
       >
         <FontAwesomeIcon
           icon={faTrashCan}
-          className="mx-2 mt-2 mb-1 text-lg text-neutral-900 group-disabled:text-zinc-400"
+          className="mx-2 mb-1 mt-2 text-lg text-neutral-900 group-disabled:text-zinc-400 dark:text-slate-100"
         />
-      </button>
-      <button
+      </IconButton>
+      <IconButton
+        size="small"
+        type="button"
         disabled={!canUndo || !isEditable}
         // @ts-ignore
-        onClick={() => activeEditor.dispatchCommand(UNDO_COMMAND)}
+        onClick={() => editor.dispatchCommand(UNDO_COMMAND)}
         id="undo"
         name="undo"
-        className="group rounded-md bg-zinc-50 shadow-md shadow-zinc-400 hover:bg-zinc-200 active:bg-zinc-400 active:shadow-zinc-300 disabled:pointer-events-none"
+        className="group rounded-md bg-zinc-50 shadow-md shadow-zinc-400 hover:bg-zinc-200 active:bg-zinc-400 active:shadow-zinc-300 disabled:pointer-events-none dark:bg-slate-800 dark:shadow-slate-950"
       >
         <FontAwesomeIcon
           icon={faUndo}
-          className="mx-2 mt-2 mb-1 text-lg text-neutral-900 group-disabled:text-zinc-400"
+          className="mx-2 mb-1 mt-2 text-lg text-neutral-900 group-disabled:text-zinc-400 dark:text-slate-100"
         />
-      </button>
-      <button
+      </IconButton>
+      <IconButton
+        size="small"
         disabled={!canRedo || !isEditable}
         // @ts-ignore
-        onClick={() => activeEditor.dispatchCommand(REDO_COMMAND)}
+        onClick={() => editor.dispatchCommand(REDO_COMMAND)}
         id="redo"
         name="redo"
-        className="group rounded-md bg-zinc-50 shadow-md shadow-zinc-400 hover:bg-zinc-200 active:bg-zinc-400 active:shadow-zinc-300 disabled:pointer-events-none"
+        className="dark group rounded-md bg-zinc-50 shadow-md shadow-zinc-400 hover:bg-zinc-200 active:bg-zinc-400 active:shadow-zinc-300 disabled:pointer-events-none dark:bg-slate-800"
       >
         <FontAwesomeIcon
           icon={faRedo}
-          className="mx-2 mt-2 mb-1 text-lg text-neutral-900 group-disabled:text-zinc-400"
+          className="mx-2 mb-1 mt-2 text-lg text-neutral-900 group-disabled:text-zinc-400 dark:text-slate-100"
         />
-      </button>
-    </div>
+      </IconButton>
+    </ButtonGroup>
   );
 }

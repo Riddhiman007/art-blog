@@ -11,5 +11,4 @@ import Navbar from "./Navbar";
 
 export { Header, Footer, Navbar };
 export * from "@mui/material";
-export * as Joy from "@mui/joy";
-
+export {Carousel}

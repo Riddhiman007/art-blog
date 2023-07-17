@@ -1,18 +1,9 @@
 import React from "react";
 
 // components
-import {
-  Box,
-  Card,
-  CardActionArea,
-  CardContent,
-  CardHeader,
-  Container,
-  CssBaseline,
-  Joy,
-  Typography,
-} from "../components";
+import { Box, Container, CssBaseline, Typography } from "../components";
 
+import { CardContent, Card, CardCover } from "@@/joy";
 import anatomy from "@@/static/img/anatomy.jpg";
 import Image from "next/image";
 /**
@@ -51,21 +42,22 @@ export default function Courses() {
       <Box className="mt-10 grid grid-cols-1 justify-center gap-7 sm:grid-cols-2 lg:grid-cols-3">
         {courses.map((course) => (
           <>
-            <Card className={`${course.background} w-fit items-center`}>
+            <Card className={`${course.background} h-full w-fit items-center px-4 py-7`}>
               {/* <Image className="static" fill src={anatomy} alt="anatomy" /> */}
-              <CardActionArea className="h-full px-4 py-7">
-                <CardContent className="flex flex-col gap-7">
-                  <Typography
-                    variant="h3"
-                    className={`items-center text-center text-3xl font-bold ${course.textColor} lg:text-5xl`}
-                  >
-                    {course.title}
-                  </Typography>
-                  <Typography variant="body2" className={`${course.textColor} text-base`}>
-                    {course.description}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
+              <CardCover>
+                <Image src={anatomy} alt="anatomy" fill />
+              </CardCover>
+              <CardContent className="flex flex-col gap-7">
+                <Typography
+                  variant="h3"
+                  className={`items-center text-center text-3xl font-bold ${course.textColor} lg:text-5xl`}
+                >
+                  {course.title}
+                </Typography>
+                <Typography variant="body2" className={`${course.textColor} text-base`}>
+                  {course.description}
+                </Typography>
+              </CardContent>
             </Card>
           </>
         ))}

@@ -7,11 +7,10 @@ module.exports = {
   ],
   theme: {
     screens: {
-      xs: '0', // mobile
-      sm: '600px', // tablet
-      md: '900px', // medium laptop
-      lg: '1024px', // desktop
-      xl: '1400px', // big screens
+      sm: { min: "0", max: '600px' }, // tablet
+      md: { min: "600", max: '900px' }, // medium laptop
+      lg: { min: "900px", max: '1024px' }, // desktop
+      xl: { min: '1400px' }, // big screens
     },
     container: {
       screens: {

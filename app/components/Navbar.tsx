@@ -51,7 +51,7 @@ import { HiHome, HiSun } from "react-icons/hi2";
 import { MdDashboard, MdLogin, MdLogout } from "react-icons/md";
 import { HiUserAdd, HiUserCircle, HiMoon } from "react-icons/hi";
 import { useTheme } from "next-themes";
-import { DarkModeContext } from "../context";
+import { DarkModeContext, MobileFirstContext } from "../context";
 
 /**
  *
@@ -59,9 +59,13 @@ import { DarkModeContext } from "../context";
  */
 export default function Navbar() {
   const { data: session } = useSession();
-  const { isDark, setIsDark } = useContext(DarkModeContext);
 
   // dark mode context
+  const { isDark, setIsDark } = useContext(DarkModeContext);
+
+  // whether the device is mobile
+  const isMobile = useContext(MobileFirstContext);
+
   // ui states
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [isLandscape, setIsLandscape] = useState(false);
@@ -104,35 +108,46 @@ export default function Navbar() {
             <MdMenu className="h-6 w-6" />
           </IconButton>
           <Box className="flex flex-row justify-evenly gap-3">
-            {/* search input */}
-            <TextField
-              placeholder="Type to search"
-              size="small"
-              sx={{ width: "20rem" }}
-              className=" mr-4 rounded-full bg-slate-50 px-7 py-2 shadow-slate-500 drop-shadow active:shadow dark:bg-slate-800 dark:shadow-slate-300"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Icon>
-                      <MdSearch />
-                    </Icon>
-                  </InputAdornment>
-                ),
-              }}
-              variant="standard"
-            />
-            {/* dark mode */}
-            <Box>
-              <IconButton onClick={() => setIsDark(!isDark)}>
-                {isDark ? <HiMoon /> : <HiSun />}
-              </IconButton>
-            </Box>
+            {isMobile ? (
+              <>
+                <IconButton>
+                  <Icon>
+                    <MdSearch />
+                  </Icon>
+                </IconButton>
+              </>
+            ) : (
+              <>
+                {/* search input */}
+                <TextField
+                  placeholder="Type to search"
+                  size="small"
+                  sx={{ width: "20rem" }}
+                  className="mr-4 rounded-full bg-slate-50 px-7 pt-2 shadow-slate-500 drop-shadow active:shadow dark:bg-slate-800 dark:shadow-slate-300"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Icon>
+                          <MdSearch />
+                        </Icon>
+                      </InputAdornment>
+                    ),
+                  }}
+                  variant="standard"
+                />
+              </>
+            )}
+
+            <IconButton onClick={() => setIsDark(!isDark)}>
+              {isDark ? <HiMoon /> : <HiSun />}
+            </IconButton>
+
             {session ? (
               <>
                 {/* avatar */}
                 <Tooltip title="Profile">
                   <IconButton onClick={(ev) => setAnchorEl(ev.currentTarget)}>
-                    <Avatar sx={{ width: "3rem", height: "3rem" }} variant="circular">
+                    <Avatar sx={{ width: "2em", height: "2em" }} variant="circular">
                       <Image
                         alt=""
                         fill
