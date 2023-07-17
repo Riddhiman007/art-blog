@@ -47,4 +47,4 @@ yarn start
 
 ## Deploying
 
-To deploy the project, first build the application as described above and then use the [.next]() file in the project.
+To deploy the project, first build the application as described above and then use the [.next](https://github.com/Riddhiman007/art-blog/tree/main/.next) file in the project.
