@@ -69,7 +69,7 @@ export default function ActionPlugin() {
     [editor]
   );
   return (
-    <ButtonGroup className=" flex flex-row flex-wrap items-start gap-2 lg:mx-10">
+    <ButtonGroup className=" flex flex-row flex-wrap items-start gap-2">
       {/* clear editor */}
       <IconButton
         size="small"
@@ -107,7 +107,7 @@ export default function ActionPlugin() {
         onClick={() => editor.dispatchCommand(REDO_COMMAND)}
         id="redo"
         name="redo"
-        className="dark group rounded-md bg-zinc-50 shadow-md shadow-zinc-400 hover:bg-zinc-200 active:bg-zinc-400 active:shadow-zinc-300 disabled:pointer-events-none dark:bg-slate-800"
+        className="dark group rounded-md bg-zinc-50 shadow-md shadow-zinc-400 hover:bg-zinc-200 active:bg-zinc-400 active:shadow-zinc-300 disabled:pointer-events-none dark:bg-slate-800 dark:shadow-slate-950"
       >
         <FontAwesomeIcon
           icon={faRedo}

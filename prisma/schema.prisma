@@ -40,7 +40,7 @@ model User {
   id            String    @id @default(cuid()) //@map("_id") @db.ObjectId
   firstname     String
   middlename    String?
-  lastname      String    
+  lastname      String
   username      String    @unique
   email         String?   @unique
   emailVerified DateTime?
@@ -48,6 +48,7 @@ model User {
   isSuperUser   Boolean?  @default(false)
   accounts      Account[]
   sessions      Session[]
+  Blog          Blog[]
 
   @@map("users")
 }
@@ -62,11 +63,23 @@ model VerificationToken {
   @@map("verification_tokens")
 }
 
-model Tutorial{
-  id String @id @unique @default(cuid())
-  title String 
+model Tutorial {
+  id          String @id @unique @default(cuid())
+  title       String
   description String
-  content String
+  content     String
 
   @@map("tutorials")
+}
+
+model Blog {
+  id          String   @id @unique @default(cuid())
+  title       String
+  description String?
+  content     String
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    String   @unique
+  created_at  DateTime @default(now())
+
+  @@map("Blogs")
 }

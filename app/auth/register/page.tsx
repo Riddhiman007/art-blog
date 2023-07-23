@@ -27,7 +27,7 @@ export default async function Register() {
   const submitRegistration: SubmitHandler<FieldValues> = async (user) => {
     console.log(user);
 
-    const res = await fetch("/user/create", {
+    const res = await fetch("/handler/register/create", {
       method: "POST",
       body: JSON.stringify({
         firstname: user.firstname,

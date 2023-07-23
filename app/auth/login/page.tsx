@@ -43,7 +43,7 @@ export default function Login() {
    */
   const submitLogin: SubmitHandler<FieldValues> = async (data) => {
     console.log("submit clicked");
-    const res = await fetch("/auth/loginHandler", {
+    const res = await fetch("/handler/login", {
       method: "POST",
       body: JSON.stringify({ email: data.email }),
     });

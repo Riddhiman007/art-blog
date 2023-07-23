@@ -18,8 +18,8 @@ const nextConfig = {
   //   serverActions: true
   // },
   typescript: { ignoreBuildErrors: true },
-  output: "export",
-  basePath: "/art-blog"
+  // output: "export",
+  // basePath: "/art-blog"
 };
 
 module.exports = nextConfig

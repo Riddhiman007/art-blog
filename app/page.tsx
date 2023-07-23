@@ -9,8 +9,6 @@ import { getServerSession } from "next-auth";
 import { MobileFirstContext } from "./context";
 
 export default async function Home() {
-  const isMobile = useContext(MobileFirstContext);
-  useEffect(() => console.log(isMobile), [isMobile]);
   return (
     <>
       <Header image={Ganesh}>

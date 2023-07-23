@@ -88,7 +88,7 @@ export default function Editor({
       }}
     >
       <div className="flex h-full max-h-fit w-full flex-col">
-        <Box className="my-4 h-fit rounded-md bg-zinc-50 shadow-md shadow-gray-500 focus-within:outline-transparent dark:bg-slate-800 dark:shadow-slate-900 lg:mx-10">
+        <Box className="my-4 h-fit rounded-md bg-zinc-50 shadow-md shadow-gray-500 focus-within:outline-transparent dark:bg-slate-800 dark:shadow-slate-900">
           <ToolbarPlugin />
           <Box>
             <hr className="mb-4 bg-slate-200" />

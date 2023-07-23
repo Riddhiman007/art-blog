@@ -36,6 +36,7 @@ import {
   REDO_COMMAND,
   UNDO_COMMAND,
   FORMAT_ELEMENT_COMMAND,
+  ElementFormatType,
 } from "lexical";
 import { BlockStylesToolBar, blockTypeToBlockName } from "./formatText";
 import { btnOnClick } from "./utils";
@@ -78,12 +79,7 @@ export default function ToolbarPlugin({}): React.JSX.Element {
   // editor is editable or not
   const [isEditable, setIsEditable] = useState(() => activeEditor.isEditable());
 
-  // current format of the text
-  const [isLeft, setIsLeft] = useState(true);
-  const [isCenter, setIsCenter] = useState(false);
-  const [isRight, setIsRight] = useState(false);
-  const [isJustify, setIsJustify] = useState(false);
-  const [format, setFormat] = useState("");
+  const [format, setFormat] = useState<ElementFormatType>("left");
 
   // all formatting styles are rendered or not
   const [isBold, setIsBold] = useState(false);
@@ -122,12 +118,8 @@ export default function ToolbarPlugin({}): React.JSX.Element {
       activeEditor.registerCommand(
         FORMAT_ELEMENT_COMMAND,
         (payload) => {
-          if (payload === "left") setIsLeft(true);
-          else if (payload === "center") setIsCenter(false);
-          else if (payload === "right") setIsRight(false);
-          else if (payload === "justify") setIsJustify(false);
           setFormat(payload);
-          // $updateToolbar();
+          $updateToolbar();
           return false;
         },
         COMMAND_PRIORITY_EDITOR
@@ -253,7 +245,11 @@ export default function ToolbarPlugin({}): React.JSX.Element {
           </IconButton>
         </ButtonGroup>
 
-        <Divider className="mx-1 !text-slate-500" orientation="vertical" />
+        <Divider
+          className="mx-1 !text-slate-100"
+          variant="middle"
+          orientation="vertical"
+        />
 
         {/* aligning the text */}
         <ButtonGroup className="gap-1">
@@ -265,6 +261,7 @@ export default function ToolbarPlugin({}): React.JSX.Element {
             }`}
             onClick={() => {
               activeEditor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "left");
+              setFormat("left");
             }}
           >
             <FontAwesomeIcon icon={faAlignLeft} />
@@ -277,6 +274,7 @@ export default function ToolbarPlugin({}): React.JSX.Element {
             }`}
             onClick={() => {
               activeEditor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "center");
+              setFormat("center");
             }}
           >
             <FontAwesomeIcon icon={faAlignCenter} />
@@ -289,6 +287,7 @@ export default function ToolbarPlugin({}): React.JSX.Element {
             }`}
             onClick={() => {
               activeEditor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "right");
+              setFormat("right");
             }}
           >
             <FontAwesomeIcon icon={faAlignRight} />
@@ -301,6 +300,7 @@ export default function ToolbarPlugin({}): React.JSX.Element {
             }`}
             onClick={() => {
               activeEditor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "justify");
+              setFormat("justify");
             }}
           >
             <FontAwesomeIcon icon={faAlignJustify} />
